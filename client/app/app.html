@@ -1,19 +1,45 @@
 <div id="app">
   <header>
     <nav>
-      <div class="logo">
+
+      <div id="nav-home">
         <span ui-sref="home">
-          <a ui-sref="home">ngBlog</a>
+         <h1> <a ui-sref="home">Lebeaucheveu</a></h1>
         </span>
-      </div>
-      <div class="links">
-        <a ui-sref="blog">blog</a>
-        <a ui-sref="admin">admin</a>
-      </div>
-    </nav>
-  </header>
+      </div><!-- end .nav-home -->
+      <ul class="nav nav-primary">
+          <li id="nav-catalog">
+            <span ui-sref="catalog">
+             <h3> <a ui-sref="catalog"><i class="fa fa-book" aria-hidden="true"></i>Notre Catalogue</a></h3>
+            </span>
+
+          </li>
+
+          <!-- end #nav-catalog -->
+
+          <li id="nav-blog">
+            <span ui-sref="blog">
+             <h3> <a ui-sref="blog"><i class="fa fa-commenting-o" aria-hidden="true"></i>Blog</a></h3>
+            </span>
+          </li><!-- end #nav-blog -->
+
+          <li id="nav-shop">
+            <span ui-sref="shop">
+             <h3> <a ui-sref="shop"><i class="fa fa-cart-plus" aria-hidden="true"></i>Magasin</a></h3>
+            </span>
+          </li><!-- end #nav-shop -->
+
+           <li id="nav-connection">
+            <span ui-sref="connection">
+             <h3> <a ui-sref="connection"><i class="fa fa-sign-in" aria-hidden="true"></i>Connexion/inscription</a></h3>
+            </span>
+          </li><!-- end #nav-connection -->
+      </ul> <!-- end .nav .nav-primary -->
+    </nav><!-- end nav -->
+  </header><!-- end header -->
+
   <main>
     <div ui-view></div>
-  </main>
+  </main><!-- end main -->
   <footer></footer>
 </div>

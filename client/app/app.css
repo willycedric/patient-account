@@ -1,119 +1,61 @@
-@import '../styles'
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
 
-html
-body
-  height 100%
+ nav {
+    width: 100%;
+    background: rgb(90,0,0);
+    border: 1px solid #ccc;
+    border-right: none;
+}
 
-body
-  font-family 'Roboto', sans-serif
-  background-color bg-color
-  *
-    box-sizing border-box
-a
-  color white
-  text-decoration none
-  &:visited
-    color white
-  &:hover
-  &:active
-    text-decoration none
+nav #nav-home{
+  text-align: center;
+  border-bottom: solid 3px rgb(70,0,0);
+}
 
-#app
-  header nav
-    height navbar-height
-    background-color primary-color
-    makeShadow(2)
-    z-index max-z
-    position fixed
-    min-width 100%
-    padding 15px
-    .logo
-      span(1/8)
-      color white
-      font-size 1.8rem
-      cursor pointer
-    .links
-      span(2/8, 5/8, 2)
-      *
-        font-size 1.3rem
-        margin-left 10px
-  main
-    padding-top navbar-height
+nav #nav-home a{
+  text-decoration: none;
+  color:#CCB0B0;
+  font-size:56px;
+  font-family: 'Inconsolata',serif ;   /*word-spacing: 0.5em;*/
+}
 
-.button
-  outline none
-  border none
-  border-radius 2px
-  background-color primary-color
-  color white
-  text-transform uppercase
-  text-align center
-  min-width 88px
-  min-height 36px
-  overflow hidden
-  user-select none
-  vertical-align middle
-  position relative
-  padding 0px 6px
-  white-space nowrap
-  cursor pointer
-  font-weight 500
-  user-select none
-  font-size 14px
-  line-height 30px
-  &[disabled]
-  &.disabled
-  :disabled
-    background-color white !important//shade(primary-color, 20%)
-    color text-disabled-color
-    box-shadow none !important
-  &.accent
-    background-color accent-color
-  &.fab
-    width 56px
-    min-width 0px
-    background-clip padding-box
-    height 56px
-    line-height 56px
-    z-index 20
-    border-radius 50%
+nav ul {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
 
-  &:active
-  &:focus
-    border none
-    outline none
+nav ul li {
+    list-style: none;
+    float: left;
+    text-align: center;
+    width: 25%; /* fallback for non-calc() browsers */
+    width: calc(100% / 4);
+    box-sizing: border-box;
+    color:#fafafa;
+    background: url(catalog.png) no-repeat 0 0.32em;
+    padding-left: 15px;
+}
 
-  &.raised
-  &.fab
-    makeShadow(1)
-    transition all .3s ease
+nav ul li:first-child {
+    border-left: none;
+}
 
-    &:active
-      makeShadow(3)
-main
-  position relative
-  min-height 400px
+nav ul li a{
+  /*font-family: 'Roboto Condensed', sans-serif;*/
+  font-family:Quicksand;
+  font-weight:700;
+  text-decoration: none;
+  color:#CCB0B0;
+  font-size: 20px;
+}
 
-  [ui-view].ng-enter
-    opacity 0
-    transform scale3d(0.5,0.5,0.5)
+nav ul li a i {
+    margin-right:15px;
+    
+    -webkit-transition:all 0.2s linear;
+    -moz-transition:all 0.2s linear;
+    -o-transition:all 0.2s linear;
+    transition:all 0.2s linear; 
+  }
 
-  [ui-view].ng-enter-active
-    opacity 1
-    transform scale3d(1,1,1)
 
-  [ui-view].ng-leave
-    opacity 1
-    transform translate3d(0,0,0)
-
-  [ui-view].ng-leave-active
-    opacity 0
-    transform translate3d(100px, 0, 0)
-
-  [ui-view].ng-enter
-  [ui-view].ng-leave
-    position absolute
-    left 0
-    right 0
-    transition all .5s ease-in-out

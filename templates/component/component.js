@@ -1,4 +1,3 @@
-// TODO: import and register the directive
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import {<%=name%>Directive} from './<%= name %>.directive';

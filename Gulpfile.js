@@ -13,9 +13,9 @@ map of paths for using with the tasks below
  */
 var paths = {
   entry: 'client/app/app.js',
-  app: ['client/app/**/*.{js,styl,html}', 'client/styles/**/*.styl'],
+  app: ['client/app/**/*.{js,css,html}', 'client/styles/**/*.css'],
   js: 'client/app/**/*!(.spec.js).js',
-  styl: ['client/app/**/*.styl', 'client/style/**/*.styl'],
+  styl: ['client/app/**/*.css', 'client/style/**/*.css'],
   toCopy: ['client/index.html'],
   html: ['client/index.html', 'client/app/**/*.html'],
   dest: 'dist',

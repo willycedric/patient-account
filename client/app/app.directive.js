@@ -1,4 +1,4 @@
-import './app.styl';
+import './app.css';
 import template from './app.html';
 
 export const appDirective = ()=> {

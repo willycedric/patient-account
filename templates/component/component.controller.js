@@ -1,4 +1,3 @@
-// TODO: export the controller
 
 class <%= upCaseName %>Controller {
   constructor() {

@@ -1,4 +1,4 @@
-import './<%= name %>.styl';
+import './<%= name %>.css';
 import {<%= upCaseName %>Controller as controller} from './<%= name %>.controller';
 import template from './<%= name %>.html';
 

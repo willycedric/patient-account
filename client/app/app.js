@@ -19,6 +19,14 @@ import ngAnimate from 'angular-animate';
 // without using default keyword
 // we must import it with the brackets
 import {home} from './components/home/home';
+import {catalog} from './components/catalog/catalog';
+import {shop} from './components/shop/shop';
+import {connection} from './components/connection/connection';
+import {blog} from './components/blog/blog';
+
+
+
+
 
 
 angular.module('app', [
@@ -30,5 +38,10 @@ angular.module('app', [
   // property who's value is the name you set the
   // module to be
   home.name,
+  catalog.name,
+  shop.name,
+  connection.name,
+  blog.name
+
 ])
 .directive('app', appDirective);
