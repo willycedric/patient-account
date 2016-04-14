@@ -3,16 +3,23 @@
     <nav>
 
       <div id="nav-element">
-        
-            <div id="nav-home">
-                <span ui-sref="home">
-                 <h1> <a ui-sref="home">Lebeaucheveu</a></h1>
-                </span>
-            </div><!-- end .nav-home -->
+            <div id="nav-header">
+                <div id="nav-logo">
+                  <span ui-sref="home">
+                   <a ui-sref="home">Lebeaucheveu</a>
+                  </span>
+                </div><!-- end #nav-home -->
+                <div id="nav-login-header">
+                  <span ui-sref="login">
+                   <a ui-sref="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Connexion/inscription</a>
+                  </span>
+                </div><!-- end #nav-login -->
+            </div><!-- end #nav-header -->
+            
             <ul class="nav nav-primary">
                 <li id="nav-catalog">
                   <span ui-sref="catalog">
-                   <h3> <a ui-sref="catalog"><i class="fa fa-book" aria-hidden="true"></i>Notre Catalogue</a></h3>
+                    <a ui-sref="catalog"><i class="fa fa-book" aria-hidden="true"></i>Catalogue</a>
                   </span>
 
                 </li>
@@ -21,19 +28,19 @@
 
                 <li id="nav-blog">
                   <span ui-sref="blog">
-                   <h3> <a ui-sref="blog"><i class="fa fa-commenting-o" aria-hidden="true"></i>Blog</a></h3>
+                    <a ui-sref="blog"><i class="fa fa-commenting-o" aria-hidden="true"></i>Blog</a>
                   </span>
                 </li><!-- end #nav-blog -->
 
                 <li id="nav-shop">
                   <span ui-sref="shop">
-                   <h3> <a ui-sref="shop"><i class="fa fa-cart-plus" aria-hidden="true"></i>Magasin</a></h3>
+                    <a ui-sref="shop"><i class="fa fa-cart-plus" aria-hidden="true"></i>Magasin</a>
                   </span>
                 </li><!-- end #nav-shop -->
 
                  <li id="nav-login">
                   <span ui-sref="login">
-                   <h3> <a ui-sref="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Connexion/inscription</a></h3>
+                    <a ui-sref="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Connexion/inscription</a>
                   </span>
                 </li><!-- end #nav-connection -->
             </ul> <!-- end .nav .nav-primary -->
