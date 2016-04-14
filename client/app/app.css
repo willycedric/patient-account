@@ -5,7 +5,9 @@
     border: 1px solid #ccc;
     border-right: none;
 }
-
+#nav-element{
+  width:90%;
+}
 nav #nav-home{
   text-align: center;
   border-bottom: solid 3px rgb(70,0,0);
@@ -56,6 +58,6 @@ nav ul li a i {
     -moz-transition:all 0.2s linear;
     -o-transition:all 0.2s linear;
     transition:all 0.2s linear; 
-  }
+}
 
 

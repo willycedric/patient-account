@@ -1,3 +1,8 @@
+/**
+	*Represents the home page component
+	* @constructor
+*/
+
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import {homeDirective} from './home.directive';
