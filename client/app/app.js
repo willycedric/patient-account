@@ -21,7 +21,7 @@ import ngAnimate from 'angular-animate';
 import {home} from './components/home/home';
 import {catalog} from './components/catalog/catalog';
 import {shop} from './components/shop/shop';
-import {connection} from './components/connection/connection';
+import {login} from './components/login/login';
 import {blog} from './components/blog/blog';
 
 
@@ -40,7 +40,7 @@ angular.module('app', [
   home.name,
   catalog.name,
   shop.name,
-  connection.name,
+  login.name,
   blog.name
 
 ])

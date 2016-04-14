@@ -1,17 +1,17 @@
-import {connection} from './connection'
-import {ConnectionController} from './connection.controller';
-import {connectionDirective} from './connection.directive';
-import template from './connection.html';
+import {login} from './login'
+import {LoginController} from './login.controller';
+import {loginDirective} from './login.directive';
+import template from './login.html';
 
-describe('Connection', ()=>{
+describe('Login', ()=>{
   let $rootScope,
   makeController;
 
-  beforeEach(window.module(connection.name));
+  beforeEach(window.module(login.name));
   beforeEach(inject((_$rootScope_)=>{
     $rootScope = _$rootScope_;
     makeController = ()=>{
-      return new ConnectionController();
+      return new LoginController();
     };
   }));
 
@@ -44,7 +44,7 @@ describe('Connection', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = connectionDirective();
+      let directive = loginDirective();
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);
@@ -55,7 +55,7 @@ describe('Connection', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(ConnectionController);
+        expect(directive.controller).to.equal(LoginController);
       });
   });
 });
