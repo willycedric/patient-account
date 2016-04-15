@@ -7,6 +7,7 @@
     border: 1px solid #ccc;
     border-right: none;
 }
+
 #nav-element{
   margin: 0 auto;
   width:90%; /*960px */
@@ -16,9 +17,8 @@
 nav .nav-primary{
 
   margin: 0 auto;
-  width: 93.75%; /* 720/768 */
+  width: 93.75%; /* 900/960 */
 }
-
 nav #nav-header{
   /*border-bottom: solid 3px rgb(70,0,0);*/
   margin: 30px auto;
@@ -35,7 +35,7 @@ nav #nav-header{
 #nav-logo  a{
   text-decoration: none;
   color:#CCB0B0;
-  font-size:1.6em; /* 24/16 */
+  font-size:1.8em; /* 24/16 */
   font-family: 'Inconsolata',serif ;   /*word-spacing: 0.5em;*/
 }
 
@@ -92,45 +92,50 @@ nav .nav-primary{
 @media screen and (max-width: 768px){
 
     nav .nav-primary{
-      width: 80,555555555556%; /* 580/720*/
+       width: 92.1875%; /* 708/768 */
     }
     nav #nav-header{
-      width: 80,555555555556%; /* 580/720 */
+      width: 92.1875%; /* 708/768 */
     }
     #nav-logo{
-      width:77.77777778%; /* 700/720 */
-      margin-left: 40px ;
-      float:left;
-    }
-
-
-    #nav-login-header{
-      display:block;
-      margin-right:150px;
-      float:right;
-  }
-
-    #nav-login-header  a{
-      text-decoration: none;
-      color:#CCB0B0;
-      font-size:0.5em; /* 24/16 */
-      font-family: 'Inconsolata',serif ;   /*word-spacing: 0.5em;*/
-      position: absolute;
-  }
-  
-    nav ul li {
-        width: 33%; /* 225/900 */ /* fallback for non-calc() browsers */
-        padding: 4.33%;
+      display:none;
     }
     #nav-login{
       display: none;
     }
-    nav ul li a{
-      font-size: 0.5em; /* 30/20 */
+    #nav-login-header{
+      display:block;
+      width:70.621468926554%; /* 500/708 */
+      margin:0 auto;
+      text-align: center;
+
     }
-    nav ul li a i {
-    margin-right:4,555555555556%;/*15/270*/
+    
+   #nav-login-header  a{
+      text-decoration: none;
+      color:#CCB0B0;
+      font-size:1.5em; /* 24/16 */
+      font-family: 'Inconsolata',serif ;   /*word-spacing: 0.5em;*/
+   } 
+   #login-icon{
+      margin-left: 10px;
+   }
+
+  nav ul {
+    margin-bottom:10px;
   }
+  
+  nav ul li {
+      width: 33%; /* 225/900 */ /* fallback for non-calc() browsers */
+      padding: 4.33%;
+  }
+  
+  nav ul li a{
+    font-size: 0.65666em; /* 30/20 */
+  }
+  nav ul li a i {
+  margin-right:4,555555555556%;/*15/270*/
+}
 }
 
 

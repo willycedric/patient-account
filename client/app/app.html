@@ -4,16 +4,19 @@
 
       <div id="nav-element">
             <div id="nav-header">
-                <div id="nav-logo">
-                  <span ui-sref="home">
-                   <a ui-sref="home">Lebeaucheveu</a>
-                  </span>
-                </div><!-- end #nav-home -->
-                <div id="nav-login-header">
-                  <span ui-sref="login">
-                   <a ui-sref="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Connexion/inscription</a>
-                  </span>
-                </div><!-- end #nav-login -->
+                    <div id="nav-logo">
+                      <span ui-sref="home">
+                       <a ui-sref="home">Lebeaucheveu</a>
+                      </span>                    
+                    </div><!-- end #nav-logo -->
+                   <div id="nav-login-header">                      
+                        <span ui-sref="home">
+                         <a ui-sref="home">Lebeaucheveu</a>
+                        </span>
+                        <span ui-sref="login" id="login-icon">
+                          <a ui-sref="login"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                        </span>
+                   </div><!-- end #nav-login -->
             </div><!-- end #nav-header -->
             
             <ul class="nav nav-primary">
@@ -21,7 +24,6 @@
                   <span ui-sref="catalog">
                     <a ui-sref="catalog"><i class="fa fa-book" aria-hidden="true"></i>Catalogue</a>
                   </span>
-
                 </li>
 
                 <!-- end #nav-catalog -->
