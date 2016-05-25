@@ -1,57 +1,40 @@
 <div id="app">
   <header>
-    <nav>
-
-      <div id="nav-element">
-            <div id="nav-header">
-                    <div id="nav-logo">
-                      <span ui-sref="home">
-                       <a ui-sref="home">Lebeaucheveu</a>
-                      </span>                    
-                    </div><!-- end #nav-logo -->
-                   <div id="nav-login-header">                      
-                        <span ui-sref="home">
-                         <a ui-sref="home">Lebeaucheveu</a>
-                        </span>
-                        <span ui-sref="login" id="login-icon">
-                          <a ui-sref="login"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
-                        </span>
-                   </div><!-- end #nav-login -->
-            </div><!-- end #nav-header -->
-            
-            <ul class="nav nav-primary">
-                <li id="nav-catalog">
-                  <span ui-sref="catalog">
-                    <a ui-sref="catalog"><i class="fa fa-book" aria-hidden="true"></i>Catalogue</a>
+       <nav>                 
+            <ul class="menu">
+                <li id="nav-web" ui-sref-active="menuSelected" class="menuItem">
+                  <span ui-sref="web">
+                    <a ui-sref="web">Web</a>
                   </span>
-                </li>
+                </li><!-- end #nav-web -->
 
-                <!-- end #nav-catalog -->
-
-                <li id="nav-blog">
-                  <span ui-sref="blog">
-                    <a ui-sref="blog"><i class="fa fa-commenting-o" aria-hidden="true"></i>Blog</a>
+                <li id="nav-mobile" ui-sref-active="menuSelected" class="menuItem">
+                  <span ui-sref="mobile">
+                    <a ui-sref="mobile">Mobile</a>
                   </span>
-                </li><!-- end #nav-blog -->
+                </li><!-- end #nav-mobile -->
 
-                <li id="nav-shop">
-                  <span ui-sref="shop">
-                    <a ui-sref="shop"><i class="fa fa-cart-plus" aria-hidden="true"></i>Magasin</a>
+                <li id="nav-practician" ui-sref-active="menuSelected" class="menuItem">
+                  <span ui-sref="practician">
+                    <a ui-sref="practician">pratician</a>
                   </span>
-                </li><!-- end #nav-shop -->
+                </li><!-- end #nav-practician -->
 
-                 <li id="nav-login">
-                  <span ui-sref="login">
-                    <a ui-sref="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Connexion/inscription</a>
+                <li id="nav-operator" ui-sref-active="menuSelected" class="menuItem">
+                  <span ui-sref="operator">
+                    <a ui-sref="operator">operator</a>
                   </span>
-                </li><!-- end #nav-connection -->
-            </ul> <!-- end .nav .nav-primary -->
-      </div><!-- #nav-elememnt -->
-    </nav><!-- end nav -->
-  </header><!-- end header -->
-
+                </li><!-- end #nav-operator -->
+                <li id="nav-superuser" ui-sref-active="menuSelected" class="menuItem">
+                  <span ui-sref="superuser">
+                    <a ui-sref="superuser">superuser</a>
+                  </span>
+                </li><!-- end #nav-superuser -->
+            </ul> <!-- end .menu -->
+        </nav><!-- end nav -->
+  </header>
   <main>
     <div ui-view></div>
-  </main><!-- end main -->
+  </main>
   <footer></footer>
 </div>

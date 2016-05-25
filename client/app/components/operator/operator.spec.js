@@ -1,17 +1,17 @@
-import {login} from './login'
-import {LoginController} from './login.controller';
-import {loginDirective} from './login.directive';
-import template from './login.html';
+import {operator} from './operator'
+import {OperatorController} from './operator.controller';
+import {operatorDirective} from './operator.directive';
+import template from './operator.html';
 
-describe('Login', ()=>{
+describe('Operator', ()=>{
   let $rootScope,
   makeController;
 
-  beforeEach(window.module(login.name));
+  beforeEach(window.module(operator.name));
   beforeEach(inject((_$rootScope_)=>{
     $rootScope = _$rootScope_;
     makeController = ()=>{
-      return new LoginController();
+      return new OperatorController();
     };
   }));
 
@@ -44,7 +44,7 @@ describe('Login', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = loginDirective();
+      let directive = operatorDirective();
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);
@@ -55,7 +55,7 @@ describe('Login', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(LoginController);
+        expect(directive.controller).to.equal(OperatorController);
       });
   });
 });

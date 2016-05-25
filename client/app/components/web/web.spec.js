@@ -1,17 +1,17 @@
-import {home} from './home'
-import {HomeController} from './home.controller';
-import {homeDirective} from './home.directive';
-import template from './home.html';
+import {web} from './web'
+import {WebController} from './web.controller';
+import {webDirective} from './web.directive';
+import template from './web.html';
 
-describe('Home', ()=>{
+describe('Web', ()=>{
   let $rootScope,
   makeController;
 
-  beforeEach(window.module(home.name));
+  beforeEach(window.module(web.name));
   beforeEach(inject((_$rootScope_)=>{
     $rootScope = _$rootScope_;
     makeController = ()=>{
-      return new HomeController();
+      return new WebController();
     };
   }));
 
@@ -44,7 +44,7 @@ describe('Home', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = homeDirective();
+      let directive = webDirective();
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);
@@ -55,7 +55,7 @@ describe('Home', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(HomeController);
+        expect(directive.controller).to.equal(WebController);
       });
   });
 });

@@ -1,17 +1,17 @@
-import {blog} from './blog'
-import {BlogController} from './blog.controller';
-import {blogDirective} from './blog.directive';
-import template from './blog.html';
+import {mobile} from './mobile'
+import {MobileController} from './mobile.controller';
+import {mobileDirective} from './mobile.directive';
+import template from './mobile.html';
 
-describe('Blog', ()=>{
+describe('Mobile', ()=>{
   let $rootScope,
   makeController;
 
-  beforeEach(window.module(blog.name));
+  beforeEach(window.module(mobile.name));
   beforeEach(inject((_$rootScope_)=>{
     $rootScope = _$rootScope_;
     makeController = ()=>{
-      return new BlogController();
+      return new MobileController();
     };
   }));
 
@@ -44,7 +44,7 @@ describe('Blog', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = blogDirective();
+      let directive = mobileDirective();
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);
@@ -55,7 +55,7 @@ describe('Blog', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(BlogController);
+        expect(directive.controller).to.equal(MobileController);
       });
   });
 });

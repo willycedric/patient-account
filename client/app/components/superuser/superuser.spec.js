@@ -1,17 +1,17 @@
-import {catalog} from './catalog'
-import {CatalogController} from './catalog.controller';
-import {catalogDirective} from './catalog.directive';
-import template from './catalog.html';
+import {superuser} from './superuser'
+import {SuperuserController} from './superuser.controller';
+import {superuserDirective} from './superuser.directive';
+import template from './superuser.html';
 
-describe('Catalog', ()=>{
+describe('Superuser', ()=>{
   let $rootScope,
   makeController;
 
-  beforeEach(window.module(catalog.name));
+  beforeEach(window.module(superuser.name));
   beforeEach(inject((_$rootScope_)=>{
     $rootScope = _$rootScope_;
     makeController = ()=>{
-      return new CatalogController();
+      return new SuperuserController();
     };
   }));
 
@@ -44,7 +44,7 @@ describe('Catalog', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = catalogDirective();
+      let directive = superuserDirective();
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);
@@ -55,7 +55,7 @@ describe('Catalog', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(CatalogController);
+        expect(directive.controller).to.equal(SuperuserController);
       });
   });
 });

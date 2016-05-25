@@ -1,17 +1,17 @@
-import {shop} from './shop'
-import {ShopController} from './shop.controller';
-import {shopDirective} from './shop.directive';
-import template from './shop.html';
+import {practician} from './practician'
+import {PracticianController} from './practician.controller';
+import {practicianDirective} from './practician.directive';
+import template from './practician.html';
 
-describe('Shop', ()=>{
+describe('Practician', ()=>{
   let $rootScope,
   makeController;
 
-  beforeEach(window.module(shop.name));
+  beforeEach(window.module(practician.name));
   beforeEach(inject((_$rootScope_)=>{
     $rootScope = _$rootScope_;
     makeController = ()=>{
-      return new ShopController();
+      return new PracticianController();
     };
   }));
 
@@ -44,7 +44,7 @@ describe('Shop', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = shopDirective();
+      let directive = practicianDirective();
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);
@@ -55,7 +55,7 @@ describe('Shop', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(ShopController);
+        expect(directive.controller).to.equal(PracticianController);
       });
   });
 });
