@@ -42,7 +42,7 @@ gulp.task('build', ['todo'], function() {
     .pipe(webpack(require('./webpack.config')))
     .pipe(gulp.dest(paths.dest));
 });
-/*
+
 gulp.task('serve', function() {
   browser({
     port: process.env.PORT || 4500,
@@ -53,16 +53,16 @@ gulp.task('serve', function() {
     }
   });
 });
-*/
+
 
 /**
 * Serving with express instead of browser
 **/
-gulp.task('serve', function(){
+/*gulp.task('serve', function(){
   app.listen(process.env.PORT||4500, function(){
     console.log('application is listening on port ', process.env.PORT||4500);
   });
-});
+});*/
 /*
 simple task to copy over needed files to dist
  */

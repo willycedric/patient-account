@@ -8,7 +8,12 @@ module.exports = {
   output: {
     filename: 'bundle.js'
   },
-
+  node:{
+    fs:"empty",
+    net:"empty",
+    tls:"empty",
+    module:"empty"
+  },
   devtool: 'sourcemap',
 // TODO: create loader for .js filest ransfroming from ES2015 to ES5
 

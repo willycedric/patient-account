@@ -5,7 +5,7 @@ const posts = ($http, API, $q) => {
   let id = 0;
 
   const get = () => {
-    return $http.get(`${API.url}/posts?_sort=createdAt&_order=DESC`)
+    return $http.get(`${API.url}/api/users`)
       .then(({data}) => {
         allPosts = data.map(post => {
           post.slug = post.title.replace(/\s+/g, '-');
