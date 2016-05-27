@@ -4,10 +4,10 @@ class WebController {
    		 this.http = $http;
    		 this.getUsers();
        this.submited=false;
-       this.submitForm = (user,isValid)=>{
+       this.submitEditForm = (user,isValid)=>{
           
           if(isValid.$valid){
-            console.log(user);
+
             this.updateUser(user);
             this.submited = false;
           }
