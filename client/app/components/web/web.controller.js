@@ -7,7 +7,6 @@ class WebController {
        this.submitEditForm = (user,isValid)=>{
           
           if(isValid.$valid){
-            console.log(user);
             this.updateUser(user);
             this.submited = false;
           }
