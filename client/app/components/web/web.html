@@ -3,33 +3,53 @@
 	 	<div class="row">
 	 		<div ng-repeat="user in vm.users">
 	 			<div class="col-sm-4">
-		 			<table>
-		 			 <!-- <tr>
-					    <th>name</th>
-					    <th>birth date</th> 
-					    <th>password</th>
-					  </tr> -->
-		 				<tr>
-		 				  <td>{{user.name}}</td>
-		 				 </tr>
-		 				 <tr>
-		 				 	<td>{{user.birthDate}}</td>
-		 				 </tr>
-		 				 <tr>
-	 				 	 	<td>{{user.password}}</td>
-		 				 </tr>
-	 				 </table>
-	 				<button type="button" class="btn btn-default btn-sm">
-	          			<span class="glyphicon glyphicon-plus"></span>
-	        		</button>
-	        		<button type="button" class="btn btn-default btn-sm">
+	 				<div ng-show="!readOrWrite">
+	 					<table>
+			 				<tr>
+			 				  <td>{{user.name}}</td>
+			 				 </tr>
+			 				 <tr>
+			 				 	<td>{{user.birthDate}}</td>
+			 				 </tr>
+			 				 <tr>
+		 				 	 	<td>{{user.password}}</td>
+			 				 </tr>
+	 				 	</table><!-- end table -->
+	 				</div>
+	 				<div ng-show="readOrWrite">
+	 						<form name="userForm" novalidate>      
+						        <!-- NAME -->
+						        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+						            <label>Name</label>
+						            <input type="text" name="name" class="form-control" ng-model="user.name"   required>
+						  			<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+						        </div>        
+						        <!-- BIRTH DATE -->
+						        <div class="form-group" ng-class="{ 'has-error' : userForm.birthDate.$invalid && !userForm.birthDate.$pristine }">
+						            <label>Birth Date</label>
+						            <input type="text" name="birthDate" class="form-control" ng-model="user.birthDate" required>
+						            <p ng-show="userForm.birthDate.$invalid && !userForm.birthDate.$pristine" class="help-block">The birth date is required.</p>
+						        </div>
+						        <!-- PASSWORD -->
+						        <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+						            <label>Password</label>
+						            <input type="text" name="password" class="form-control" ng-model="user.password" required>
+						            <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">The password is required.</p>
+						        </div>        
+						        <button type="submit" class="btn btn-primary" ng-show="readOrWrite" ng-click="vm.submitEditForm(user,userForm);readOrWrite=!readOrWrite" ng-disabled="userForm.$invalid">Edit</button>
+						        <button  class="btn btn-primary" ng-click="readOrWrite=!readOrWrite">Cancel</button>
+						        
+						    </form> <!-- end form -->
+	 				</div>		 			
+	        		<button type="button" class="btn btn-default btn-sm" ng-show="!readOrWrite" ng-click="readOrWrite=!readOrWrite">
 	          			<span class="glyphicon glyphicon-edit"></span>
 	        		</button>
-	        		<button type="button" class="btn btn-default btn-sm" ng-click="vm.deleteUser(user)">
+	        		<button type="button" class="btn btn-default btn-sm" ng-show="!readOrWrite" ng-click="vm.deleteUser(user)">
 	          			<span class="glyphicon glyphicon-erase"></span>
 	        		</button>  
 	        		<hr/>      
 	 			</div>	<!-- end #col-sm-4 -->
+
 
 	 		</div>
 	 	</div>
