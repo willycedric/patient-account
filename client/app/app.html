@@ -1,36 +1,51 @@
+
 <div id="app">
   <header>
-       <nav>                 
-            <ul class="menu">
-                <li id="nav-web" ui-sref-active="menuSelected" class="menuItem">
+       <nav role="navigation" class="navbar navbar-default">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" data-target="#navvarCollapse" data-toggle="collapse" class="navbar-toggle">
+              <span class="sr-only">Toggle navigation </span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button><!-- end button -->
+            <span ui-sref="web">
+              <a ui-sref="web" class="navbar-brand">Web</a>
+            </span><!-- end .navbar-brand -->
+          </div> <!-- end #navbar-header -->
+          <div id ="navbarCollapse" class="collapse navbar-collapse">               
+            <ul class="nav navbar-nav">
+                <li id="nav-web" class="active">
                   <span ui-sref="web">
                     <a ui-sref="web">Web</a>
                   </span>
                 </li><!-- end #nav-web -->
 
-                <li id="nav-mobile" ui-sref-active="menuSelected" class="menuItem">
+                <li id="nav-mobile">
                   <span ui-sref="mobile">
                     <a ui-sref="mobile">Mobile</a>
                   </span>
                 </li><!-- end #nav-mobile -->
 
-                <li id="nav-practician" ui-sref-active="menuSelected" class="menuItem">
+                <li id="nav-practician">
                   <span ui-sref="practician">
                     <a ui-sref="practician">Pratician</a>
                   </span>
                 </li><!-- end #nav-practician -->
 
-                <li id="nav-operator" ui-sref-active="menuSelected" class="menuItem">
+                <li id="nav-operator">
                   <span ui-sref="operator">
                     <a ui-sref="operator">Operator</a>
                   </span>
                 </li><!-- end #nav-operator -->
-                <li id="nav-superuser" ui-sref-active="menuSelected" class="menuItem">
+                <li id="nav-superuser" >
                   <span ui-sref="superuser">
                     <a ui-sref="superuser">Superuser</a>
                   </span>
                 </li><!-- end #nav-superuser -->
             </ul> <!-- end .menu -->
+          </div><!-- end #navbarCollapse -->
         </nav><!-- end nav -->
   </header>
   <main>
