@@ -3,16 +3,18 @@ class WebController {
   constructor($http) {
    		 this.http = $http;
    		 this.getUsers();
-       this.submited=false;
-       this.submitEditForm = (user,isValid)=>{
+       this.submitEditForm = (user,userForm)=>{
           
-          if(isValid.$valid){
-
+          if(userForm.$valid){
             this.updateUser(user);
-            this.submited = false;
+          }       
+       };
+
+       //Post a new user account
+       this.addUser = (user, userForm)=>{
+          if(userForm.$valid){
+            this.postUser(user);
           }
-         
-          
        };
        //delete a user
        this.deleteUser = (data)=>{
@@ -64,7 +66,7 @@ class WebController {
         url:'http://localhost:3000/api/users',
         data:data
       }).then((response)=>{
-        this.newUser = response.data;
+        this.getUsers();
       },(err)=>{
         console.error(err);
       });
