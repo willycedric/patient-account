@@ -35,10 +35,10 @@
 			</div>			
 		</div> <!-- end #row -->
 
-	 	<div class="row" ng-show="!addOrNo" >
+	 	<div class="row" ng-show="!addOrNo">
 	 		<div ng-repeat="user in vm.users| searchFor:searchString">
-	 			<div class="col-sm-4" class="user-box">
-	 				<div ng-show="!readOrWrite">
+	 			<div class="col-sm-4" ng-class="{'user-edition':readOrWrite}">
+	 				<div ng-show="!readOrWrite" class="centered">
 	 					<table>
 			 				<tr>
 			 				  <td>{{user.name}}</td>
@@ -75,17 +75,16 @@
 						        <button  class="btn btn-primary" ng-click="readOrWrite=!readOrWrite">Cancel</button>
 						        
 						    </form> <!-- end form -->
-	 				</div>		 			
-	        		<button type="button" class="btn btn-default btn-sm" ng-show="!readOrWrite" ng-click="readOrWrite=!readOrWrite">
-	          			<span class="glyphicon glyphicon-edit"></span>
-	        		</button>
-	        		<button type="button" class="btn btn-default btn-sm" ng-show="!readOrWrite" ng-click="vm.deleteUser(user)">
-	          			<span class="glyphicon glyphicon-erase"></span>
-	        		</button>  
-	        	   
+ 					</div> 
+ 					<div class="centered">		
+		        		<button type="button" class="btn btn-default btn-sm" ng-show="!readOrWrite" ng-click="readOrWrite=!readOrWrite">
+		          			<span class="glyphicon glyphicon-edit"></span>
+		        		</button>
+		        		<button type="button" class="btn btn-default btn-sm" ng-show="!readOrWrite" ng-click="vm.deleteUser(user)">
+		          			<span class="glyphicon glyphicon-erase"></span>
+		        		</button> 	
+		        	</div>		   
 	 			</div>	<!-- end #col-sm-4 -->
-
-
 	 		</div>
 	 	</div>
 	</div>
