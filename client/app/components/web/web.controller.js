@@ -1,22 +1,55 @@
 
 class WebController {
   constructor($http) {
+
    		 this.http = $http;
+       this.isEditing = false; // Use to toggle the view and edition mode of the form 
+       this.editedUser={};
    		 this.getUsers();
+       /**
+        * [show the edition form]
+        * @return {[type]} [description]
+        */
+       this.showEditionForm = (user) =>{
+          this.editedUser = angular.copy(user);
+          console.log(JSON.stringify(this.editedUser));
+       };
+       /**
+        * [show users]
+        * @return {[type]} [description]
+        */
+       this.viewUsers = ()=>{
+          this.isEditing=false;
+       };
+       /**
+        * [description]
+        * @param  {[type]} user     [editied user]
+        * @param  {[type]} userForm [form object]
+        * @return {[type]}          [description]
+        */
        this.submitEditForm = (user,userForm)=>{
-          
+          this.isEditing=false;
           if(userForm.$valid){
             this.updateUser(user);
           }       
        };
 
-       //Post a new user account
+       /**
+        * Post a new user account
+        * @param  {[type]} user     [description]
+        * @param  {[type]} userForm [description]
+        * @return {[type]}          [description]
+        */
        this.addUser = (user, userForm)=>{
           if(userForm.$valid){
             this.postUser(user);
           }
        };
-       //delete a user
+       /**
+        * delete a user
+        * @param  {[type]} data [description]
+        * @return {[type]}      [description]
+        */
        this.deleteUser = (data)=>{
        		this.http.delete('http://localhost:3000/api/users',{params:{id:data._id}})
        		.then((response)=>{
@@ -27,7 +60,11 @@ class WebController {
     		});
        };
 
-       //Update user
+       /**
+        * Update user
+        * @param  {[type]} user [description]
+        * @return {[type]}      [description]
+        */
        this.updateUser = (user)=>{
           this.http.put('http://localhost:3000/api/users/'+user._id,user)
           .then((response)=>{
@@ -37,8 +74,11 @@ class WebController {
             console.error(err);
           });
        };
-   }
-   	//get All the users
+    };
+   /**
+    *   get All the users
+    * @return {[type]} [description]
+    */
     getUsers(){
     	this.http({
     		method:'GET',
@@ -59,7 +99,11 @@ class WebController {
     	});
     }
 
-    //Add a new user
+    /**
+     * Add a new user
+     * @param  {[type]} data [description]
+     * @return {[type]}      [description]
+     */
     postUser(data){
       this.http({
         method:'POST',
