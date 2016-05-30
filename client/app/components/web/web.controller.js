@@ -3,24 +3,8 @@ class WebController {
   constructor($http) {
 
    		 this.http = $http;
-       this.isEditing = false; // Use to toggle the view and edition mode of the form 
        this.editedUser={};
    		 this.getUsers();
-       /**
-        * [show the edition form]
-        * @return {[type]} [description]
-        */
-       this.showEditionForm = (user) =>{
-          this.editedUser = angular.copy(user);
-          console.log(JSON.stringify(this.editedUser));
-       };
-       /**
-        * [show users]
-        * @return {[type]} [description]
-        */
-       this.viewUsers = ()=>{
-          this.isEditing=false;
-       };
        /**
         * [description]
         * @param  {[type]} user     [editied user]
@@ -51,7 +35,7 @@ class WebController {
         * @return {[type]}      [description]
         */
        this.deleteUser = (data)=>{
-       		this.http.delete('http://localhost:3000/api/users',{params:{id:data._id}})
+       		this.http.delete('http://192.168.3.208:3000/api/users',{params:{id:data._id}})
        		.then((response)=>{
     			console.log(JSON.stringify(response.data)," was successfully removed");
     			this.getUsers();
@@ -66,7 +50,7 @@ class WebController {
         * @return {[type]}      [description]
         */
        this.updateUser = (user)=>{
-          this.http.put('http://localhost:3000/api/users/'+user._id,user)
+          this.http.put('http://192.168.3.208:3000/api/users/'+user._id,user)
           .then((response)=>{
             console.log(JSON.stringify(response.data)," was successfully updated");
             this.getUsers();
@@ -82,7 +66,7 @@ class WebController {
     getUsers(){
     	this.http({
     		method:'GET',
-    		url:'http://localhost:3000/api/users'
+    		url:'http://192.168.3.208:3000/api/users'
     	}).then((reponse)=>{
     		this.users = reponse.data;
     		// Compute the number of row(s) used to display the user
@@ -107,7 +91,7 @@ class WebController {
     postUser(data){
       this.http({
         method:'POST',
-        url:'http://localhost:3000/api/users',
+        url:'http://192.168.3.208:3000/api/users',
         data:data
       }).then((response)=>{
         this.getUsers();
