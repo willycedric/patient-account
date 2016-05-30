@@ -1,3 +1,118 @@
 <section class="mobile">
-  <h1>Hey from {{ vm.greeting }}</h1>
+  <div class="container">
+		<div class="row" class="top-block">
+			<div class="col-sm-6">
+				 <button type="submit" ng-show="!addOrNo"  ng-click="addOrNo=!addOrNo" class="btn btn-primary"  data-toggle="modal" data-target="#basicModal1">New Account</button>
+				 <div ng-show="addOrNo" class="col-sm-5">
+					<div class="modal fade" id="basicModal1" tabindex="-1" role="dialog" aria-labelledby="basicModal1" aria-hidden="true">
+					      <div class="modal-dialog">
+						    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+							        <h4 class="modal-title text-center" id="myModalLabel">New User</h4>
+							      </div>
+							      <div class="modal-body">
+							        <form name="userForm"  novalidate>      
+					                    <!-- NAME -->
+					                    <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+					                        <label>Name</label>
+					                        <input type="text" name="name" class="form-control" ng-model="user.name"   required>
+					                    <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+					                    </div>        
+					                    <!-- BIRTH DATE -->
+					                    <div class="form-group" ng-class="{ 'has-error' : userForm.birthDate.$invalid && !userForm.birthDate.$pristine }">
+					                        <label>Birth Date</label>
+					                        <input type="text" name="birthDate" class="form-control" ng-model="user.birthDate" required>
+					                        <p ng-show="userForm.birthDate.$invalid && !userForm.birthDate.$pristine" class="help-block">The birth date is required.</p>
+					                    </div>
+					                    <!-- PASSWORD -->
+					                    <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+					                        <label>Password</label>
+					                        <input type="text" name="password" class="form-control" ng-model="user.password" required>
+					                        <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">The password is required.</p>
+					                    </div> 
+					                    <div class="text-center">      
+						                  <button type="submit" class="btn btn-primary" ng-show="addOrNo" ng-click="vm.addUser(user,userForm);addOrNo=!addOrNo" ng-disabled="userForm.$invalid" data-dismiss="modal">Add user</button>
+							        <button  type="reset" class="btn btn-primary" ng-click="addOrNo=!addOrNo" data-dismiss="modal">Cancel</button>
+					                   </div>
+					                </form> <!-- end form -->
+							      </div><!-- modal body -->  
+					       </div><!-- end .modal-content -->
+				          </div><!-- end .modal-dialog -->
+	             </div><!-- end modal -->
+			    </div>
+			</div>
+			<div class="col-sm-6">
+				<input type="text" class="search" ng-show="!addOrNo" ng-model="searchString" placeholder="Enter your search terms"/>
+			</div>			
+		</div> <!-- end #row -->
+	<div class="row" ng-show="!addOrNo" >
+	 		<div ng-repeat="user in vm.users| searchFor:searchString">
+	 			<div class="col-sm-4" class="user-box">
+	 				<div ng-show="!readOrWrite">
+	 					<table class="centered">
+			 				<tr>
+			 				  <td>{{user.name}}</td>
+			 				 </tr>
+			 				 <tr>
+			 				 	<td>{{user.birthDate}}</td>
+			 				 </tr>
+			 				 <tr>
+		 				 	 	<td>{{user.password}}</td>
+			 				 </tr>
+	 				 	</table><!-- end table -->
+	 				</div>
+	 				<div class="text-center">	 			
+		        		<button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#basicModal2"  ng-click="vm.showEditionForm(user)">
+		          			<span class="glyphicon glyphicon-edit"></span>
+		        		</button>
+		        		<button type="button" class="btn btn-default btn-sm" ng-show="!readOrWrite" ng-click="vm.deleteUser(user)">
+		          			<span class="glyphicon glyphicon-erase"></span>
+		        		</button>  
+	        	    </div>
+	 				
+	 				<div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal2" aria-hidden="true">
+					      <div class="modal-dialog">
+						    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+							        <h4 class="modal-title text-center" id="myModalLabel">Edit User</h4>
+							      </div>
+							      <div class="modal-body">
+				        <div >
+	 						<form name="userForm" novalidate>      
+						        <!-- NAME -->
+						        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+						            <label>Name</label>
+						            <input type="text" name="name" class="form-control" ng-model="vm.editedUser.name"   required>
+						  			<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+						        </div>        
+						        <!-- BIRTH DATE -->
+						        <div class="form-group" ng-class="{ 'has-error' : userForm.birthDate.$invalid && !userForm.birthDate.$pristine }">
+						            <label>Birth Date</label>
+						            <input type="text" name="birthDate" class="form-control" ng-model="vm.editedUser.birthDate" required>
+						            <p ng-show="userForm.birthDate.$invalid && !userForm.birthDate.$pristine" class="help-block">The birth date is required.</p>
+						        </div>
+						        <!-- PASSWORD -->
+						        <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+						            <label>Password</label>
+						            <input type="text" name="password" class="form-control" ng-model="vm.editedUser.password" required>
+						            <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">The password is required.</p>
+						        </div>
+						        <div class="text-center">        
+							        <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="vm.submitEditForm(vm.editedUser,userForm)" ng-disabled="userForm.$invalid">Edit</button>
+							        <button  class="btn btn-primary" data-dismiss="modal">Cancel</button>
+						        </div>
+						        
+						    </form> <!-- end form -->
+	 				</div>
+							      </div><!-- modal body -->  
+					       </div><!-- end .modal-content -->
+				          </div><!-- end .modal-dialog -->
+	             </div><!-- end modal --> 				
+	        	   
+	         </div>	<!-- end #col-sm-4 -->
+ 		</div><!-- end ng-repeat -->
+	</div> 	<!-- end .row-->
+ </div> <!-- end .container -->
 </section>
