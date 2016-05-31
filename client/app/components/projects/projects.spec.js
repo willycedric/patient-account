@@ -1,17 +1,17 @@
-import {practician} from './practician'
-import {PracticianController} from './practician.controller';
-import {practicianDirective} from './practician.directive';
-import template from './practician.html';
+import {projects} from './projects'
+import {ProjectsController} from './projects.controller';
+import {projectsDirective} from './projects.directive';
+import template from './projects.html';
 
-describe('Practician', ()=>{
+describe('Projects', ()=>{
   let $rootScope,
   makeController;
 
-  beforeEach(window.module(practician.name));
+  beforeEach(window.module(projects.name));
   beforeEach(inject((_$rootScope_)=>{
     $rootScope = _$rootScope_;
     makeController = ()=>{
-      return new PracticianController();
+      return new ProjectsController();
     };
   }));
 
@@ -44,7 +44,7 @@ describe('Practician', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = practicianDirective();
+      let directive = projectsDirective();
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);
@@ -55,7 +55,7 @@ describe('Practician', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(PracticianController);
+        expect(directive.controller).to.equal(ProjectsController);
       });
   });
 });

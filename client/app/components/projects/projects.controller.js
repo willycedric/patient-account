@@ -1,6 +1,6 @@
 
-class MobileController {
-  constructor($http) {
+class ProjectsController {
+   constructor($http) {
 
    		 this.http = $http;
        this.editedUser={};
@@ -37,7 +37,7 @@ class MobileController {
         * @return {[type]}      [description]
         */
        this.deleteUser = (data)=>{
-       		this.http.delete('http://192.168.3.208:3000/api/mobile',{params:{id:data._id}})
+       		this.http.delete('http://192.168.3.208:3000/api/project',{params:{id:data._id}})
        		.then((response)=>{
     			console.log(JSON.stringify(response.data)," was successfully removed");
     			this.getUsers();
@@ -52,7 +52,7 @@ class MobileController {
         * @return {[type]}      [description]
         */
        this.updateUser = (user)=>{
-          this.http.put('http://192.168.3.208:3000/api/mobile/'+user._id,user)
+          this.http.put('http://192.168.3.208:3000/api/project/'+user._id,user)
           .then((response)=>{
             console.log(JSON.stringify(response.data)," was successfully updated");
             this.getUsers();
@@ -68,7 +68,7 @@ class MobileController {
     getUsers(){
     	this.http({
     		method:'GET',
-    		url:'http://192.168.3.208:3000/api/mobile'
+    		url:'http://192.168.3.208:3000/api/project'
     	}).then((reponse)=>{
     		this.users = reponse.data;
     		// Compute the number of row(s) used to display the user
@@ -93,7 +93,7 @@ class MobileController {
     postUser(data){
       this.http({
         method:'POST',
-        url:'http://192.168.3.208:3000/api/mobile',
+        url:'http://192.168.3.208:3000/api/project',
         data:data
       }).then((response)=>{
         this.getUsers();
@@ -102,5 +102,8 @@ class MobileController {
       });
     }
 }
-MobileController.$inject = ['$http'];
-export {MobileController};
+ProjectsController.$inject = ['$http'];
+
+export {ProjectsController};
+
+
