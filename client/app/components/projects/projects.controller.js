@@ -5,7 +5,7 @@ class ProjectsController {
    		 this.http = $http;
        this.editedUser={};
    		
-       this.url =`${API.home}/api/project`;
+       this.url =`${API.voluntis}/api/project`;
         this.getProjects();
        /**
         * [description]
