@@ -6,12 +6,19 @@ class ProjectsController {
         this.editedproject={};
         this.displayListOfProjects=true;
         this.listOfAvailablesRole ={};
+       /* this.listOfProjectsDetails = {
+        	length:0,
+        	addElement: function(eltement){
+        		[].push(this,eltement);
+        	}
+        };*/
    		//to do
    		this.showNotification = ()=>{
    			this.displayListOfProjects=false;
    		}
        this.url =`${API.voluntis}/api/project`;
         this.getProjects();
+        console.log(this.listOfProjectsDetails);
        /**
         * [description]
         * @param  {[type]} project     [editied project]
@@ -70,7 +77,25 @@ class ProjectsController {
           });
        };
 
+       this.extractRole = (accounts) =>{
+       		var listOfRole=[];
+       		angular.forEach(accounts, (account,key) => {
+       				listOfRole.push(account.role);
+       		});
+       		return listOfRole;
+       };
+		//
+       this.getProjectsDetails = (listOfProjects) => {
+       		var listOfProjectsDetails =[];
+       		angular.forEach(listOfProjects, (project, key) => {
+	       		return listOfProjectsDetails.push({
+	       			name: project.name,
+	       			role:this.extractRole(project.accounts)
+	       		});       			
+       		});
+       };
     };
+
    /**
     *   get All the projects
     * @return {[type]} [description]
@@ -79,9 +104,9 @@ class ProjectsController {
     	this.http({
     		method:'GET',
     		url:this.url
-    	}).then((reponse)=>{
-    		this.projects = reponse.data;
-    		
+    	}).then((response)=>{
+    		this.projects = response.data;
+	    		console.log(this.getProjectsDetails(response.data));
     	}, (err)=>{
     		console.error(err);
     	});
@@ -111,3 +136,7 @@ ProjectsController.$inject = ['$http','API'];
 export {ProjectsController};
 
 
+/*<select ng-model="orderProp" ng-options="place.category for place in places | unique:'category'">
+    <option value="0">Default</option>
+    // unique options from the categories
+</select>*/
