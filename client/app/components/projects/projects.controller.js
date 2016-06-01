@@ -1,10 +1,12 @@
 
 class ProjectsController {
-   constructor($http) {
+   constructor($http,API) {
 
    		 this.http = $http;
        this.editedUser={};
-   		 this.getUsers();
+   		
+       this.url =`${API.home}/api/project`;
+        this.getProjects();
        /**
         * [description]
         * @param  {[type]} user     [editied user]
@@ -37,10 +39,10 @@ class ProjectsController {
         * @return {[type]}      [description]
         */
        this.deleteUser = (data)=>{
-       		this.http.delete('http://192.168.3.208:3000/api/project',{params:{id:data._id}})
+       		this.http.delete(this.url,{params:{id:data._id}})
        		.then((response)=>{
     			console.log(JSON.stringify(response.data)," was successfully removed");
-    			this.getUsers();
+    			this.getProjects();
     		},(err)=>{
     			console.error(err);
     		});
@@ -52,10 +54,10 @@ class ProjectsController {
         * @return {[type]}      [description]
         */
        this.updateUser = (user)=>{
-          this.http.put('http://192.168.3.208:3000/api/project/'+user._id,user)
+          this.http.put(this.url+'/'+user._id,user)
           .then((response)=>{
             console.log(JSON.stringify(response.data)," was successfully updated");
-            this.getUsers();
+            this.getProjects();
           },(err)=>{
             console.error(err);
           });
@@ -65,21 +67,12 @@ class ProjectsController {
     *   get All the users
     * @return {[type]} [description]
     */
-    getUsers(){
+    getProjects(){
     	this.http({
     		method:'GET',
-    		url:'http://192.168.3.208:3000/api/project'
+    		url:this.url
     	}).then((reponse)=>{
-    		this.users = reponse.data;
-    		// Compute the number of row(s) used to display the user
-    		if(this.users.length <= 4){
-    			this.nbRows = 1;
-    		}
-	   		else if(Math.ceil(this.users.length/4) < 4){
-	   			this.nbRows = Math.floor(this.users.length/4)+1;
-	   		}else{
-	   			this.nbRows = Math.floor(this.users.length/4);
-	   		}
+    		this.projects = reponse.data;
     	}, (err)=>{
     		console.error(err);
     	});
@@ -93,16 +86,16 @@ class ProjectsController {
     postUser(data){
       this.http({
         method:'POST',
-        url:'http://192.168.3.208:3000/api/project',
+        url:this.url,
         data:data
       }).then((response)=>{
-        this.getUsers();
+        this.getProjects();
       },(err)=>{
         console.error(err);
       });
     }
 }
-ProjectsController.$inject = ['$http'];
+ProjectsController.$inject = ['$http','API'];
 
 export {ProjectsController};
 

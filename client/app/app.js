@@ -6,11 +6,14 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import ngAnimate from 'angular-animate';
 import {projects} from './components/projects/projects';
+import {shared} from './shared/shared';
+
 
 angular.module('app', [
   uiRouter,
   ngAnimate,
-  projects.name
+  projects.name,
+  shared.name
 ])
 .directive('app', appDirective)
 .filter('searchFor', function(){
