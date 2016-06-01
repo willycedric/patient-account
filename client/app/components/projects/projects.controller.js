@@ -2,43 +2,50 @@
 class ProjectsController {
    constructor($http,API) {
 
-   		 this.http = $http;
-       this.editedUser={};
-   		
+   		this.http = $http;
+        this.editedproject={};
+        this.displayListOfProjects=true;
+        this.listOfAvailablesRole ={};
+   		//to do
+   		this.showNotification = ()=>{
+   			this.displayListOfProjects=false;
+   		}
        this.url =`${API.voluntis}/api/project`;
         this.getProjects();
        /**
         * [description]
-        * @param  {[type]} user     [editied user]
-        * @param  {[type]} userForm [form object]
+        * @param  {[type]} project     [editied project]
+        * @param  {[type]} projectForm [form object]
         * @return {[type]}          [description]
         */
-       this.submitEditForm = (user,userForm)=>{
+       this.submitEditForm = (project,projectForm)=>{
           this.isEditing=false;
-          if(userForm.$valid){
-            this.updateUser(user);
+          if(projectForm.$valid){
+            this.updateproject(project);
           }       
        };
-       this.showEditionForm = (user)=>{
-       		this.editedUser = angular.copy(user);
+       this.showEditionForm = (project)=>{
+       		this.editedproject = angular.copy(project);
        }
        /**
-        * Post a new user account
-        * @param  {[type]} user     [description]
-        * @param  {[type]} userForm [description]
+        * Post a new project account
+        * @param  {[type]} project     [description]
+        * @param  {[type]} projectForm [description]
         * @return {[type]}          [description]
         */
-       this.addUser = (user, userForm)=>{
-          if(userForm.$valid){
-            this.postUser(user);
+       this.addProject = (project, projectForm)=>{
+          if(projectForm.$valid){
+          	console.log(project);
+          	debugger;
+            this.postProject(project);
           }
        };
        /**
-        * delete a user
+        * delete a project
         * @param  {[type]} data [description]
         * @return {[type]}      [description]
         */
-       this.deleteUser = (data)=>{
+       this.deleteproject = (data)=>{
        		this.http.delete(this.url,{params:{id:data._id}})
        		.then((response)=>{
     			console.log(JSON.stringify(response.data)," was successfully removed");
@@ -49,12 +56,12 @@ class ProjectsController {
        };
 
        /**
-        * Update user
-        * @param  {[type]} user [description]
+        * Update project
+        * @param  {[type]} project [description]
         * @return {[type]}      [description]
         */
-       this.updateUser = (user)=>{
-          this.http.put(this.url+'/'+user._id,user)
+       this.updateproject = (project)=>{
+          this.http.put(this.url+'/'+project._id,project)
           .then((response)=>{
             console.log(JSON.stringify(response.data)," was successfully updated");
             this.getProjects();
@@ -62,9 +69,10 @@ class ProjectsController {
             console.error(err);
           });
        };
+
     };
    /**
-    *   get All the users
+    *   get All the projects
     * @return {[type]} [description]
     */
     getProjects(){
@@ -73,17 +81,18 @@ class ProjectsController {
     		url:this.url
     	}).then((reponse)=>{
     		this.projects = reponse.data;
+    		
     	}, (err)=>{
     		console.error(err);
     	});
     }
 
     /**
-     * Add a new user
+     * Add a new project
      * @param  {[type]} data [description]
      * @return {[type]}      [description]
      */
-    postUser(data){
+    postProject(data){
       this.http({
         method:'POST',
         url:this.url,
@@ -94,6 +103,8 @@ class ProjectsController {
         console.error(err);
       });
     }
+
+
 }
 ProjectsController.$inject = ['$http','API'];
 
