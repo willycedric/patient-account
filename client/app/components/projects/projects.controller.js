@@ -4,13 +4,19 @@ class ProjectsController {
    		this.http = $http;
         this.editedproject={};
         this.displayListOfProjects=true;
+        this.displaySelectedProject=false;
         this.listOfAvailablesRole ={};
         this.listOfProjectsDetails = [];
         this.selectedRole = null;
    		//to do
-   		this.showNotification = ()=>{
+   		this.showProjectInformations = ()=>{
    			this.displayListOfProjects=false;
-   		}
+   			this.displaySelectedProject =true;
+   		};
+   		this.showProjectList = () =>{
+   			this.displaySelectedProject =false;
+   			this.displayListOfProjects=true;
+   		};
        this.url =`${API.voluntis}/api/project`;
         this.getProjects();
        /**

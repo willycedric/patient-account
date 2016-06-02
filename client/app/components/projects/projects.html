@@ -1,14 +1,9 @@
 <section class="projects">
 	<div class="container">
-		<div class="row">
-			<p ng-repeat="project in vm.listOfProjectsDetails">
-					{{project |json }}
-			</p>
-		</div>
 		<div class="row" ng-show="vm.displayListOfProjects">           
            <div class="col-sm-4 col-md-3 col-xs-6" ng-repeat="project in vm.projects">
            		<div class="dummy"></div>
-        		<a  ui-sref="projects" class="thumbnail" ng-click="vm.showNotification()">{{project.name}}</a>
+        		<a  ui-sref="projects" class="thumbnail" ng-click="vm.showProjectInformations()">{{project.name}}</a>
            </div><!-- end ng-repeat -->
            <div class="col-sm-3 col-md-2 col-xs-4 center-block">
            		<div id="plus">
@@ -46,12 +41,13 @@
 						</div>
 			</div>
 		</div> <!-- end .row -->
-		<div class="row" ng-show="!displaysSelectedProject">
+		<div class="row" ng-show="vm.displaySelectedProject">
 			<div class="col-sm-6 col-md-6 col-xs-6>" ng-repeat="project in vm.listOfProjectsDetails">
 				<select name="availableRole" id="availableRole" ng-options="role.name for role in project.role track by role.id" ng-model="vm.selectedRole">
 				</select>
 			</div>
-			<tt> selected role = {{vm.selectedRole.name}} </tt>
+			<tt> selected role = {{vm.selectedRole.name}} </tt><br/>
+			<button type="button"  class="btn btn-primary btn-lg" ng-click="vm.showProjectList()">Click me</button>
 		</div><!-- end .row -->
 	</div><!-- end .container -->
 
