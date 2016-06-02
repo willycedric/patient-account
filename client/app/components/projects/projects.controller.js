@@ -1,4 +1,3 @@
-
 class ProjectsController {
    constructor($http,API) {
 
@@ -6,19 +5,14 @@ class ProjectsController {
         this.editedproject={};
         this.displayListOfProjects=true;
         this.listOfAvailablesRole ={};
-       /* this.listOfProjectsDetails = {
-        	length:0,
-        	addElement: function(eltement){
-        		[].push(this,eltement);
-        	}
-        };*/
+        this.listOfProjectsDetails = [];
+        this.selectedRole = null;
    		//to do
    		this.showNotification = ()=>{
    			this.displayListOfProjects=false;
    		}
        this.url =`${API.voluntis}/api/project`;
         this.getProjects();
-        console.log(this.listOfProjectsDetails);
        /**
         * [description]
         * @param  {[type]} project     [editied project]
@@ -80,17 +74,31 @@ class ProjectsController {
        this.extractRole = (accounts) =>{
        		var listOfRole=[];
        		angular.forEach(accounts, (account,key) => {
-       				listOfRole.push(account.role);
+       			listOfRole.push(account.role);
        		});
-       		return listOfRole;
+       		return listOfRole.filter(function(elt, index,self){
+    						return index == self.indexOf(elt);
+    					});
        };
-		//
+
+       this.parseRole  = (roles) =>{
+       		var arr=[];
+       		angular.forEach(roles, (name, key)=>{
+       			arr.push({
+       				id:key,
+       				name:name
+       			});
+       		});
+       		return arr;
+       };
+		
        this.getProjectsDetails = (listOfProjects) => {
        		var listOfProjectsDetails =[];
        		angular.forEach(listOfProjects, (project, key) => {
-	       		return listOfProjectsDetails.push({
+	       		this.listOfProjectsDetails.push({
 	       			name: project.name,
-	       			role:this.extractRole(project.accounts)
+	       			//remove duplicate role and return an array with unique role 
+	       			role:this.parseRole(this.extractRole(project.accounts))
 	       		});       			
        		});
        };
@@ -106,7 +114,7 @@ class ProjectsController {
     		url:this.url
     	}).then((response)=>{
     		this.projects = response.data;
-	    		console.log(this.getProjectsDetails(response.data));
+	    		this.getProjectsDetails(response.data);
     	}, (err)=>{
     		console.error(err);
     	});
@@ -128,8 +136,6 @@ class ProjectsController {
         console.error(err);
       });
     }
-
-
 }
 ProjectsController.$inject = ['$http','API'];
 
