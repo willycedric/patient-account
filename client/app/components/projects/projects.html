@@ -1,16 +1,29 @@
 <section class="projects">
 	<div class="container">
-		<div class="row" ng-show="vm.displayListOfProjects">           
-           <div class="col-sm-4 col-md-3 col-xs-6" ng-repeat="project in vm.projects">
-           		<div class="dummy"></div>
-        		<a  ui-sref="projects" class="thumbnail" ng-click="vm.showProjectInformations()">{{project.name}}</a>
-           </div><!-- end ng-repeat -->
-           <div class="col-sm-3 col-md-2 col-xs-4 center-block">
-           		<div id="plus">
-	        		<button type="button" ng-show="!displayNewProjectEditor"  ng-click="displayNewProjectEditor=!displayNewProjectEditor" data-toggle="modal" data-target="#basicModal1" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-plus"></i></button>
-           		</div><!-- .plus -->
-        	</div>
-		</div><!-- end .row -->
+		<!-- display project informations -->
+		<div  ng-repeat="project in vm.listOfProjectsDetails">
+			<div class="row" ng-show="vm.displayListOfProjects">           
+	           <div class="col-sm-4 col-md-3 col-xs-6">
+	           		<div class="dummy"></div>
+	        		<a  ui-sref="projects" class="thumbnail" ng-click="vm.showProjectInformations()">{{project.name}}</a>
+	           </div>
+	           <div class="col-sm-3 col-md-2 col-xs-4 center-block">
+	           		<div id="plus">
+		        		<button type="button" ng-show="!displayNewProjectEditor"  ng-click="displayNewProjectEditor=!displayNewProjectEditor" data-toggle="modal" data-target="#basicModal1" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-plus"></i></button>
+	           		</div><!-- .plus -->
+	        	</div>
+			</div><!-- end .row -->
+
+			<div class="row" ng-show="vm.displaySelectedProject">
+				<div class="col-sm-6 col-md-6 col-xs-6>" >
+					<select name="availableRole" id="availableRole" ng-options="role.name for role in project.role track by role.id" ng-model="vm.selectedRole">
+					</select>
+				</div>
+				<tt> selected role = {{vm.selectedRole.name}} </tt><br/>
+				<button type="button"  class="btn btn-primary btn-lg" ng-click="vm.showProjectList()">Click me</button>
+			</div><!-- end .row -->
+		</div><!-- end ng-repeat -->
+		<!-- add new project to the list -->
 		<div class="row" ng-show = "displayNewProjectEditor">
 					<div class="col-sm-4 col-md-3 col-xs-6">
 						 <div ng-show="displayNewProjectEditor" class="col-sm-4">
@@ -39,16 +52,8 @@
 							          </div><!-- end .modal-dialog -->
 				             </div><!-- end modal -->
 						</div>
-			</div>
+					</div>
 		</div> <!-- end .row -->
-		<div class="row" ng-show="vm.displaySelectedProject">
-			<div class="col-sm-6 col-md-6 col-xs-6>" ng-repeat="project in vm.listOfProjectsDetails">
-				<select name="availableRole" id="availableRole" ng-options="role.name for role in project.role track by role.id" ng-model="vm.selectedRole">
-				</select>
-			</div>
-			<tt> selected role = {{vm.selectedRole.name}} </tt><br/>
-			<button type="button"  class="btn btn-primary btn-lg" ng-click="vm.showProjectList()">Click me</button>
-		</div><!-- end .row -->
 	</div><!-- end .container -->
 
 </section>
