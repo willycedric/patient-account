@@ -37,7 +37,7 @@ class SuperuserController {
         * @return {[type]}      [description]
         */
        this.deleteUser = (data)=>{
-       		this.http.delete('http://192.168.3.208:3000/api/superuser',{params:{id:data._id}})
+       		this.http.delete('http://192.168.3.208:4000/api//superuser',{params:{id:data._id}})
        		.then((response)=>{
     			console.log(JSON.stringify(response.data)," was successfully removed");
     			this.getUsers();
@@ -52,7 +52,7 @@ class SuperuserController {
         * @return {[type]}      [description]
         */
        this.updateUser = (user)=>{
-          this.http.put('http://192.168.3.208:3000/api/superuser/'+user._id,user)
+          this.http.put('http://192.168.3.208:4000/api//superuser/'+user._id,user)
           .then((response)=>{
             console.log(JSON.stringify(response.data)," was successfully updated");
             this.getUsers();
@@ -68,7 +68,7 @@ class SuperuserController {
     getUsers(){
     	this.http({
     		method:'GET',
-    		url:'http://192.168.3.208:3000/api/superuser'
+    		url:'http://192.168.3.208:4000/api//superuser'
     	}).then((reponse)=>{
     		this.users = reponse.data;
     		// Compute the number of row(s) used to display the user
@@ -93,7 +93,7 @@ class SuperuserController {
     postUser(data){
       this.http({
         method:'POST',
-        url:'http://192.168.3.208:3000/api/superuser',
+        url:'http://192.168.3.208:4000/api//superuser',
         data:data
       }).then((response)=>{
         this.getUsers();
