@@ -1,7 +1,8 @@
 class ProjectsController {
-   constructor($http,API) {
+   constructor($http,API,$window) {
 
-   		this.http = $http;
+   		  this.http = $http;
+        this.window = $window;
         this.editedproject={};
         this.displayListOfProjects=true;
         this.displaySelectedProject=false;
@@ -9,14 +10,29 @@ class ProjectsController {
         this.listOfProjectsDetails = [];
         this.selectedRole = null;
    		//to do
-   		this.showProjectInformations = ()=>{
-   			this.displayListOfProjects=false;
-   			this.displaySelectedProject =true;
+   		this.showProjectInformations = (name)=>{
+     			this.displayListOfProjects=false;
+          angular.forEach(this.listOfProjectsDetails, (project, key)=>{
+               if(name == project.name && !project.isDisplayed){
+                  console.log("second time ",name);
+                  project.isDisplayed = true;
+               }else if (name == project.name && project.isDisplayed){
+                  project.isDisplayed = false;
+                 // this.displayListOfProjects = true;
+               }
+          });      
    		};
-   		this.showProjectList = () =>{
-   			this.displaySelectedProject =false;
-   			this.displayListOfProjects=true;
-   		};
+      //Todo
+   		this.showProjectList = (name) =>{
+     			this.displayListOfProjects=true;
+           angular.forEach(this.listOfProjectsDetails, (project, key)=>{
+          if (name == project.name && project.isDisplayed){
+              project.isDisplayed = false;
+             // this.displayListOfProjects = true;
+           }
+      });
+ 		 };
+
        this.url =`${API.voluntis}/api/project`;
         this.getProjects();
        /**
@@ -99,14 +115,16 @@ class ProjectsController {
        };
 		
        this.getProjectsDetails = (listOfProjects) => {
-       		var listOfProjectsDetails =[];
+       		
        		angular.forEach(listOfProjects, (project, key) => {
 	       		this.listOfProjectsDetails.push({
 	       			name: project.name,
+              isDisplayed:false,
 	       			//remove duplicate role and return an array with unique role 
 	       			role:this.parseRole(this.extractRole(project.accounts))
 	       		});       			
        		});
+          
        };
     };
 
@@ -138,12 +156,13 @@ class ProjectsController {
         data:data
       }).then((response)=>{
         this.getProjects();
+        this.window.location.reload();
       },(err)=>{
         console.error(err);
       });
     }
 }
-ProjectsController.$inject = ['$http','API'];
+ProjectsController.$inject = ['$http','API','$window'];
 
 export {ProjectsController};
 
