@@ -9,19 +9,7 @@ class ProjectsController {
         this.listOfAvailablesRole ={};
         this.listOfProjectsDetails = [];
         this.selectedRole = null;
-   		//to do
-   		this.showProjectInformations = (name)=>{
-     			this.displayListOfProjects=false;
-          angular.forEach(this.listOfProjectsDetails, (project, key)=>{
-               if(name == project.name && !project.isDisplayed){
-                  console.log("second time ",name);
-                  project.isDisplayed = true;
-               }else if (name == project.name && project.isDisplayed){
-                  project.isDisplayed = false;
-                 // this.displayListOfProjects = true;
-               }
-          });      
-   		};
+    
       //Todo
    		this.showProjectList = (name) =>{
      			this.displayListOfProjects=true;
@@ -118,6 +106,7 @@ class ProjectsController {
        		
        		angular.forEach(listOfProjects, (project, key) => {
 	       		this.listOfProjectsDetails.push({
+              id:project._id,
 	       			name: project.name,
               isDisplayed:false,
 	       			//remove duplicate role and return an array with unique role 
