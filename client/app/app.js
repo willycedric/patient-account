@@ -6,6 +6,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import ngAnimate from 'angular-animate';
 import {projects} from './components/projects/projects';
+import {details} from './components/details/details';
 import {shared} from './shared/shared';
 
 
@@ -13,6 +14,7 @@ angular.module('app', [
   uiRouter,
   ngAnimate,
   projects.name,
+  details.name,
   shared.name
 ])
 .directive('app', appDirective)
