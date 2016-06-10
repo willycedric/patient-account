@@ -26,7 +26,7 @@ angular.module('app', [
 		var result = [];
 		searchString = searchString.toLowerCase();
 		angular.forEach(arr, function(item){
-			if(item.name.toLowerCase().indexOf(searchString) !== -1){
+			if(item.account.name.toLowerCase().indexOf(searchString) !== -1){
 			result.push(item);
 		}
 		});
