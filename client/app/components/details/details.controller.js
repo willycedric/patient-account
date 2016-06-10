@@ -13,17 +13,19 @@ class DetailsController {
 		   *
 		   */
     	 this.getSelectedUserRole = (role)=>{
-    	 	this.showSelectedRole=false;
-	        this.selecterUserRole=[];
-    	 	angular.forEach(this.project.accounts,(account,key)=>{
-    	 			if(account.role == role){
-    	 				this.selecterUserRole.push({
-    	 					key:key,
-    	 					account:account
-    	 				});
-    	 			}
-    	 	});
-    	 	this.showSelectedRole=true;    	 	
+    	 
+	 			this.showSelectedRole=false;
+		        this.selectedUserRole=[];
+	    	 	angular.forEach(this.project.accounts,(account,key)=>{
+	    	 			if(account.role == role){
+	    	 				this.selectedUserRole.push({
+	    	 					key:key,
+	    	 					account:account
+	    	 				});
+	    	 			}
+	    	 	});
+	    	 	this.showSelectedRole=true;
+    	 	//debugger;    	 	
     	 };
     	 /**
 		   *
@@ -76,21 +78,27 @@ class DetailsController {
 		   *
 		   */
 	      this.submitEditForm = (user,userForm)=>{
-	          this.isEditing=false;
 	          if(userForm.$valid){
 		          this.project.accounts[user.key] = user.account;
-		          this.updateProject(this.project);
-
+		          //this.updateProject(this.project,user.account.role);
 	            }
 	          };       
          /**
 		   *
 		   */
-         this.updateProject = (project) =>{
+         this.updateProject = (project,role) =>{
          	this.http.put(this.url+'/'+project._id,project)
          	.then((response)=>{
          		this.getProject(this.projectID);
-         		console.log(JSON.stringify(response.data.accounts));
+         		this.selectedUserRole=[];
+         		angular.forEach(response.data.accounts,(account,key)=>{
+	    	 			if(account.role == role){
+	    	 				this.selectedUserRole.push({
+	    	 					key,
+	    	 					account
+	    	 				});
+	    	 			}
+	    	 	});
          	},(badResponse)=>{
          		console.error(badResponse);
          	});
@@ -111,8 +119,7 @@ class DetailsController {
 	    		this.project = response.data;	    				
 	    		this.projectRole = this.parseRole(this.extractRole(response.data.accounts));
 	    		this.getUserNumberPerRole(response.data.accounts,this.projectRole);	
-	    		this.projectName = response.data.name;
-	    		 this.getSelectedUserRole(this.projectRole);    		
+	    		this.projectName = response.data.name;		
 	    	}, (err)=>{
 	    		console.error(err);
 	    	});

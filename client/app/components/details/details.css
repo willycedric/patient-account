@@ -24,8 +24,8 @@
 }
 .details ul li {
    display: block;
-   margin: 20px;
-   padding: 10px;
+   margin: 10px;
+   padding: 5px;
 }
 .details ul li a {
    text-decoration: none;
