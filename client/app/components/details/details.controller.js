@@ -88,12 +88,8 @@ class DetailsController {
          this.updateProject = (project,role) =>{
          	this.http.put(this.url+'/'+project._id,project)
          	.then((response)=>{
-         			this.getProject();
-         			this.getSelectedUserRole(role);
-         			console.log("Display the array", this.selectedUserRole);
-         			debugger;
-         			//$window.location.reload();
-
+         			this.getProject();         			    			
+         			$window.location.reload();
          	},(badResponse)=>{
          		console.error(badResponse);
          	});
@@ -102,14 +98,16 @@ class DetailsController {
 
          this.addNewAccount = (user, userForm) => {
          	if(userForm.$valid){
+         		console.log('im here');
          		this.project.accounts.push(user);
+         		console.log(JSON.stringify(this.project));
          		this.http({
          			url:this.url,
          			method:'POST',
          			data:this.project
          		})
          		.then((response)=>{
-					this.getProject();
+					//this.getProject();
 					console.log(JSON.stringify(response.data));
          		}, (err)=>{
          			console.error(err);

@@ -96,6 +96,7 @@
 	         </div>	<!-- end #col-sm-4 -->
  		</div><!-- end ng-repeat -->
 		</div> 	<!-- end .row-->
+		<!-- Adding new users account -->
 		<div class="row">
 					<div class="col-sm-6 col-md-6 col-lg-6 col-xs-6"></div>
 					 <div ng-show="addOrNo" class="col-sm-6">
@@ -123,7 +124,7 @@
 							                    <!-- PASSWORD -->
 							                    <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
 							                        <label>Password</label>
-							                        <input type="text" name="password" class="form-control" ng-model="user.password" required>
+							                        <input type="password" name="password" class="form-control" ng-model="user.password" required>
 							                        <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">The password is required.</p>
 							                    </div>       
 							                    <!-- BIRTH DATE -->
@@ -135,7 +136,14 @@
 							                    <!-- ROLE -->
 							                    <div class="form-group" ng-class="{ 'has-error' : userForm.role.$invalid && !userForm.role.$pristine }">
 							                        <label>Role</label>
-							                        <input type="text" name="role" class="form-control" ng-model="user.role" required>
+							                        <!-- <input type="text" name="role" class="form-control" ng-model="user.role" required> -->
+							                        <select name="role" ng-model="user.role">
+							                        	<option value="patient">Patient </option>
+							                        	<option value="practician">Practicain </option>
+							                        	<option value="nurse">Nurse</option>
+							                        	<option value="agent">Agent </option>
+							                        	<option value="superuser">SuperUser</option>
+						                        	</select>
 							                        <p ng-show="userForm.role.$invalid && !userForm.role.$pristine" class="help-block">The role is required.</p>
 							                    </div> 
 							                    <div class="text-center">      
