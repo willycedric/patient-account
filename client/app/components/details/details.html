@@ -8,16 +8,97 @@
 			<div class="col-sm-6 col-lg-6 col-xs-6 col-md-6 center-text">
 				<ul class="list-group">
 					<li class="list-group_item"  ng-repeat="role in vm.projectRole"> 
-						<a href="#" ng-click="vm.getSelectedUserRole(role.name)"> {{role.name}} </a>
+						<a ui-sref="details({name:vm.project._id})" ng-click="vm.getSelectedUserRole(role.name)"> {{role.name}} </a>
 						<span class="badge"> {{vm.userPerRole[role.name]}}</span>
 					</li>
 				</ul>
 			</div>	
+		
 		</div><!-- end .row -->
-		<div class ="row" ng-show="vm.showSelectedRole">
+		<div class ="row" ng-show="vm.showSelectedUserRole">
 			<div class="col-sm-6">
 				 <button type="submit" ng-show="!addOrNo"  ng-click="addOrNo=!addOrNo" class="btn btn-primary"  data-toggle="modal" data-target="#basicModal1">New Account</button>
-					 <div ng-show="addOrNo" class="col-sm-5">
+			</div> <!-- end .col-sm -->
+			<div class="col-sm-6">
+				<input type="text" class="search" ng-model="searchString" placeholder="Enter your search terms"/>
+			</div>	<!-- end .col-sm -->	
+	 		<div ng-repeat="user in vm.selectedUserRole| searchFor:searchString">
+	 			<div class="col-sm-4 box" class="user-box">
+	 				<div>
+	 					<table class="centered">
+			 				<tr>
+			 				  <td>{{user.account.name}}</td>
+			 				 </tr>
+			 				 <tr>
+			 				 	<td>{{user.account.login}}</td>
+			 				 </tr>
+			 				 <tr>
+		 				 	 	<td>{{user.account.password}}</td>
+			 				 </tr>
+			 				  <tr>
+		 				 	 	<td>{{user.account.dateOfBirth | date}}</td>
+			 				 </tr>
+	 				 	</table><!-- end table -->
+	 				</div> <!-- end table -->
+	 				<div class="text-center">	 			
+		        		<button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#basicModal2"  ng-click="vm.showEditionForm(user)">
+		          			<span class="glyphicon glyphicon-edit"></span>
+		        		</button>
+		        		<button type="button" class="btn btn-default btn-sm" ng-show="!readOrWrite" ng-click="vm.deleteUser(user.account)">
+		          			<span class="glyphicon glyphicon-erase"></span>
+		        		</button>  
+	        	    </div> <!-- end button -->
+	 				
+	 				<div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal2" aria-hidden="true">
+					      <div class="modal-dialog">
+						    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+							        <h4 class="modal-title text-center" id="myModalLabel">Edit User</h4>
+							      </div>
+							      <div class="modal-body">
+							        <div >
+				 						<form name="userForm" novalidate>      
+									        <!-- NAME -->
+									        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+									            <label>Name</label>
+									            <input type="text" name="name" class="form-control" ng-model="vm.editedUser.account.name"   required>
+									  			<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+									        </div>        
+									        <!-- BIRTH DATE -->
+									        <div class="form-group" ng-class="{ 'has-error' : userForm.dateOfBirth.$invalid && !userForm.dateOfBirth.$pristine }">
+									            <label>Birth Date</label>
+									            <input type="text" name="dateOfBirth" class="form-control" ng-model="vm.editedUser.account.dateOfBirth" required>
+									            <p ng-show="userForm.dateOfBirth.$invalid && !userForm.dateOfBirth.$pristine" class="help-block">The birth date is required.</p>
+									        </div>
+									          <!-- LOGIN login-->
+									        <div class="form-group" ng-class="{ 'has-error' : userForm.dateOfBirth.$invalid && !userForm.login.$pristine }">
+									            <label>Birth Date</label>
+									            <input type="text" name="login" class="form-control" ng-model="vm.editedUser.account.login" required>
+									            <p ng-show="userForm.login.$invalid && !userForm.login.$pristine" class="help-block">The birth date is required.</p>
+									        </div>
+									        <!-- PASSWORD -->
+									        <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+									            <label>Password</label>
+									            <input type="text" name="password" class="form-control" ng-model="vm.editedUser.account.password" required>
+									            <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">The password is required.</p>
+									        </div>
+									        <div class="text-center">        
+										        <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="vm.submitEditForm(vm.editedUser,userForm)" ng-disabled="userForm.$invalid">Edit</button>
+										        <button  class="btn btn-primary" data-dismiss="modal">Cancel</button>
+									        </div>										      
+									    </form>
+				 				</div><!-- end form -->
+						      </div><!-- modal body -->  
+					       </div><!-- end .modal-content -->
+				          </div><!-- end .modal-dialog -->
+	               </div><!-- end modal --> 	        	   
+	         </div>	<!-- end #col-sm-4 -->
+ 		</div><!-- end ng-repeat -->
+		</div> 	<!-- end .row-->
+		<div class="row">
+					<div class="col-sm-6 col-md-6 col-lg-6 col-xs-6"></div>
+					 <div ng-show="addOrNo" class="col-sm-6">
 							<div class="modal fade" id="basicModal1" tabindex="-1" role="dialog" aria-labelledby="basicModal1" aria-hidden="true">
 							      <div class="modal-dialog">
 								    <div class="modal-content">
@@ -32,21 +113,33 @@
 							                        <label>Name</label>
 							                        <input type="text" name="name" class="form-control" ng-model="user.name"   required>
 							                    <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
-							                    </div>        
+							                    </div>
+							                    <!-- LOGIN -->
+							                    <div class="form-group" ng-class="{ 'has-error' : userForm.login.$invalid && !userForm.login.$pristine }">
+							                        <label>Login</label>
+							                        <input type="text" name="login" class="form-control" ng-model="user.login"   required>
+							                    <p ng-show="userForm.login.$invalid && !userForm.login.$pristine" class="help-block">You login is required.</p>
+							                    </div>   
+							                    <!-- PASSWORD -->
+							                    <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+							                        <label>Password</label>
+							                        <input type="text" name="password" class="form-control" ng-model="user.password" required>
+							                        <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">The password is required.</p>
+							                    </div>       
 							                    <!-- BIRTH DATE -->
 							                    <div class="form-group" ng-class="{ 'has-error' : userForm.birthDate.$invalid && !userForm.birthDate.$pristine }">
 							                        <label>Birth Date</label>
 							                        <input type="text" name="birthDate" class="form-control" ng-model="user.birthDate" required>
 							                        <p ng-show="userForm.birthDate.$invalid && !userForm.birthDate.$pristine" class="help-block">The birth date is required.</p>
 							                    </div>
-							                    <!-- PASSWORD -->
-							                    <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
-							                        <label>Password</label>
-							                        <input type="text" name="password" class="form-control" ng-model="user.password" required>
-							                        <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">The password is required.</p>
+							                    <!-- ROLE -->
+							                    <div class="form-group" ng-class="{ 'has-error' : userForm.role.$invalid && !userForm.role.$pristine }">
+							                        <label>Role</label>
+							                        <input type="text" name="role" class="form-control" ng-model="user.role" required>
+							                        <p ng-show="userForm.role.$invalid && !userForm.role.$pristine" class="help-block">The role is required.</p>
 							                    </div> 
 							                    <div class="text-center">      
-								                  <button type="submit" class="btn btn-primary" ng-show="addOrNo" ng-click="vm.addUser(user,userForm);addOrNo=!addOrNo" ng-disabled="userForm.$invalid" data-dismiss="modal">Add user</button>
+								                  <button type="submit" class="btn btn-primary" ng-show="addOrNo" ng-click="vm.addNewAccount(user,userForm);addOrNo=!addOrNo" ng-disabled="userForm.$invalid" data-dismiss="modal">Add user</button>
 									        <button  type="reset" class="btn btn-primary" ng-click="addOrNo=!addOrNo" data-dismiss="modal">Cancel</button>
 							                   </div>
 							                </form> <!-- end form -->
@@ -55,85 +148,8 @@
 						          </div><!-- end .modal-dialog -->
 			             </div><!-- end modal -->
 				    </div> <!-- end .show addOrNot -->
-			</div> <!-- end .col-sm -->
-			<div class="col-sm-6">
-				<input type="text" class="search" ng-show="!addOrNo" ng-model="searchString" placeholder="Enter your search terms"/>
-			</div>	
-		</div><!-- end .row -->
-		<div class="row"  ng-show="vm.showSelectedRole">
-		 		<div ng-repeat="user in vm.selectedUserRole| searchFor:searchString">
-		 			<div class="col-sm-4 box" class="user-box">
-		 				<div>
-		 					<table class="centered">
-				 				<tr>
-				 				  <td>{{user.account.name}}</td>
-				 				 </tr>
-				 				 <tr>
-				 				 	<td>{{user.account.login}}</td>
-				 				 </tr>
-				 				 <tr>
-			 				 	 	<td>{{user.account.password}}</td>
-				 				 </tr>
-				 				  <tr>
-			 				 	 	<td>{{user.account.dateOfBirth | date}}</td>
-				 				 </tr>
-		 				 	</table><!-- end table -->
-		 				</div> <!-- end table -->
-		 				<div class="text-center">	 			
-			        		<button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#basicModal2"  ng-click="vm.showEditionForm(user)">
-			          			<span class="glyphicon glyphicon-edit"></span>
-			        		</button>
-			        		<button type="button" class="btn btn-default btn-sm" ng-show="!readOrWrite" ng-click="vm.deleteUser(user.account)">
-			          			<span class="glyphicon glyphicon-erase"></span>
-			        		</button>  
-		        	    </div> <!-- end button -->
-		 				
-		 				<div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal2" aria-hidden="true">
-						      <div class="modal-dialog">
-							    <div class="modal-content">
-								      <div class="modal-header">
-								        <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
-								        <h4 class="modal-title text-center" id="myModalLabel">Edit User</h4>
-								      </div>
-								      <div class="modal-body">
-								        <div >
-					 						<form name="userForm" novalidate>      
-										        <!-- NAME -->
-										        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-										            <label>Name</label>
-										            <input type="text" name="name" class="form-control" ng-model="vm.editedUser.account.name"   required>
-										  			<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
-										        </div>        
-										        <!-- BIRTH DATE -->
-										        <div class="form-group" ng-class="{ 'has-error' : userForm.dateOfBirth.$invalid && !userForm.dateOfBirth.$pristine }">
-										            <label>Birth Date</label>
-										            <input type="text" name="dateOfBirth" class="form-control" ng-model="vm.editedUser.account.dateOfBirth" required>
-										            <p ng-show="userForm.dateOfBirth.$invalid && !userForm.dateOfBirth.$pristine" class="help-block">The birth date is required.</p>
-										        </div>
-										          <!-- LOGIN login-->
-										        <div class="form-group" ng-class="{ 'has-error' : userForm.dateOfBirth.$invalid && !userForm.login.$pristine }">
-										            <label>Birth Date</label>
-										            <input type="text" name="login" class="form-control" ng-model="vm.editedUser.account.login" required>
-										            <p ng-show="userForm.login.$invalid && !userForm.login.$pristine" class="help-block">The birth date is required.</p>
-										        </div>
-										        <!-- PASSWORD -->
-										        <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
-										            <label>Password</label>
-										            <input type="text" name="password" class="form-control" ng-model="vm.editedUser.account.password" required>
-										            <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">The password is required.</p>
-										        </div>
-										        <div class="text-center">        
-											        <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="vm.submitEditForm(vm.editedUser,userForm)" ng-disabled="userForm.$invalid">Edit</button>
-											        <button  class="btn btn-primary" data-dismiss="modal">Cancel</button>
-										        </div>										        
-										    </form>
-					 				</div><!-- end form -->
-							      </div><!-- modal body -->  
-						       </div><!-- end .modal-content -->
-					          </div><!-- end .modal-dialog -->
-		               </div><!-- end modal --> 	        	   
-		         </div>	<!-- end #col-sm-4 -->
-	 		</div><!-- end ng-repeat -->
-		</div> 	<!-- end .row-->
+			</div> 
+			
+		
 	</div><!-- end .container -->
 </section>

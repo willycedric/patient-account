@@ -1,20 +1,19 @@
 
 class DetailsController {
-  constructor($stateParams,$http,API) {
+  constructor($stateParams,$http,API,$window) {
 		 this.http= $http;
 		 this.selectedRole;
 	     this.url =`${API.voluntis}/api/project`;
 	     this.userPerRole = {};
 	  	 //project id passing through url
 	     this.projectID = $stateParams.name;
-    	 this.getProject(this.projectID);
-    	 this.showSelectedRole = false;
+    	 this.getProject();
+    	 this.showSelectedUserRole = true;
+    	 console.log(this.showSelectedUserRole);
     	 /**
 		   *
-		   */
-    	 this.getSelectedUserRole = (role)=>{
-    	 
-	 			this.showSelectedRole=false;
+		 */
+    	 this.getSelectedUserRole = (role)=>{    	 
 		        this.selectedUserRole=[];
 	    	 	angular.forEach(this.project.accounts,(account,key)=>{
 	    	 			if(account.role == role){
@@ -24,10 +23,10 @@ class DetailsController {
 	    	 				});
 	    	 			}
 	    	 	});
-	    	 	this.showSelectedRole=true;
     	 	//debugger;    	 	
     	 };
-    	 /**
+   
+       	 /**
 		   *
 		   */
 		 this.extractRole = (accounts) =>{
@@ -79,8 +78,8 @@ class DetailsController {
 		   */
 	      this.submitEditForm = (user,userForm)=>{
 	          if(userForm.$valid){
-		          this.project.accounts[user.key] = user.account;
-		          //this.updateProject(this.project,user.account.role);
+	          	  this.project.accounts[user.key] = user.account;
+		          this.updateProject(this.project,user.account.role);
 	            }
 	          };       
          /**
@@ -89,19 +88,33 @@ class DetailsController {
          this.updateProject = (project,role) =>{
          	this.http.put(this.url+'/'+project._id,project)
          	.then((response)=>{
-         		this.getProject(this.projectID);
-         		this.selectedUserRole=[];
-         		angular.forEach(response.data.accounts,(account,key)=>{
-	    	 			if(account.role == role){
-	    	 				this.selectedUserRole.push({
-	    	 					key,
-	    	 					account
-	    	 				});
-	    	 			}
-	    	 	});
+         			this.getProject();
+         			this.getSelectedUserRole(role);
+         			console.log("Display the array", this.selectedUserRole);
+         			debugger;
+         			//$window.location.reload();
+
          	},(badResponse)=>{
          		console.error(badResponse);
          	});
+
+         };
+
+         this.addNewAccount = (user, userForm) => {
+         	if(userForm.$valid){
+         		this.project.accounts.push(user);
+         		this.http({
+         			url:this.url,
+         			method:'POST',
+         			data:this.project
+         		})
+         		.then((response)=>{
+					this.getProject();
+					console.log(JSON.stringify(response.data));
+         		}, (err)=>{
+         			console.error(err);
+         		});
+         	}
          };
  
     };//End constructor
@@ -110,7 +123,7 @@ class DetailsController {
 	    *   get the current project
 	    * @return {[type]} [description]
 	    */
-	    getProject(projectName){
+	    getProject(){
 	    	this.http({
 	    		url:this.url+'/'+this.projectID,
 	    		method:'GET'
@@ -127,7 +140,7 @@ class DetailsController {
 
   }  //End class
 
-DetailsController.$inject=['$stateParams','$http','API'];
+DetailsController.$inject=['$stateParams','$http','API','$window'];
 export {DetailsController};
 
 
