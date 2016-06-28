@@ -15,6 +15,7 @@ class DetailsController {
 		 */
     	 this.getSelectedUserRole = (role)=>{    	 
 		        this.selectedUserRole=[];
+		        console.log("Project Name ",this.project.name);
 	    	 	angular.forEach(this.project.accounts,(account,key)=>{
 	    	 			if(account.role == role){
 	    	 				this.selectedUserRole.push({
@@ -74,7 +75,7 @@ class DetailsController {
 		   };
 			
 		   /**
-		   *
+		   * Edit a particular user
 		   */
 	      this.submitEditForm = (user,userForm)=>{
 	          if(userForm.$valid){
@@ -98,22 +99,29 @@ class DetailsController {
 
          this.addNewAccount = (user, userForm) => {
          	if(userForm.$valid){
-         		console.log('im here');
-         		this.project.accounts.push(user);
-         		console.log(JSON.stringify(this.project));
+               user.attachedProjectName = this.project.name;
          		this.http({
          			url:this.url,
          			method:'POST',
-         			data:this.project
+         			data:user
          		})
          		.then((response)=>{
-					//this.getProject();
-					console.log(JSON.stringify(response.data));
+         			this.getProject();
          		}, (err)=>{
          			console.error(err);
          		});
          	}
          };
+
+         this.deleteUserAccount = (account)=>{
+         		this.http.delete(this.url,{params:{projectID: this.project._id,accountID:account._id}})
+         		.then((response)=>{
+         			this.getProject();
+         			$window.location.reload();
+         		},(err)=>{
+         			console.error(err);
+         		})
+        };
  
     };//End constructor
 
