@@ -21,7 +21,7 @@ class ProjectsController {
       });
  		 };
 
-       this.url =`${API.voluntis}/api/project`;
+       this.url =`${API.home}/api/project`;
         this.getProjects();
        /**
         * [description]
@@ -46,7 +46,7 @@ class ProjectsController {
         */
        this.addProject = (project, projectForm)=>{
           if(projectForm.$valid){
-          	console.log(project);
+          	//console.log(project);
           	//debugger;
             this.postProject(project);
           }
@@ -144,6 +144,7 @@ class ProjectsController {
         url:this.url,
         data:data
       }).then((response)=>{
+        console.log(response.data);
         this.getProjects();
         this.window.location.reload();
       },(err)=>{
