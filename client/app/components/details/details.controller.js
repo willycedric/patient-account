@@ -9,13 +9,11 @@ class DetailsController {
 	     this.projectID = $stateParams.name;
     	 this.getProject();
     	 this.showSelectedUserRole = true;
-    	 console.log(this.showSelectedUserRole);
     	 /**
 		   *
 		 */
     	 this.getSelectedUserRole = (role)=>{    	 
 		        this.selectedUserRole=[];
-		        console.log("Project Name ",this.project.name);
 	    	 	angular.forEach(this.project.accounts,(account,key)=>{
 	    	 			if(account.role == role){
 	    	 				this.selectedUserRole.push({
@@ -112,11 +110,16 @@ class DetailsController {
          		});
          	}
          };
+         
 
+         /**
+          * delete a user account 
+          */
+         
          this.deleteUserAccount = (account)=>{
          		this.http.delete(this.url,{params:{projectID: this.project._id,accountID:account._id}})
          		.then((response)=>{
-         			this.getProject();
+         			//this.getProject();
          			$window.location.reload();
          		},(err)=>{
          			console.error(err);
