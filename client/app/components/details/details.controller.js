@@ -104,7 +104,11 @@ class DetailsController {
          			data:user
          		})
          		.then((response)=>{
-         			this.getProject();
+         			if(response.status == 202){
+						console.log(JSON.stringify(response.data));
+         			}else{
+	         			this.getProject();
+         			}
          		}, (err)=>{
          			console.error(err);
          		});
