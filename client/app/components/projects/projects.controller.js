@@ -146,7 +146,7 @@ class ProjectsController {
       }).then((response)=>{
         console.log(response.data);
         this.getProjects();
-        this.window.location.reload();
+        //this.window.location.reload();
       },(err)=>{
         console.error(err);
       });
