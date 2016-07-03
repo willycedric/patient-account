@@ -1,5 +1,12 @@
 <section class="details">
 	<div class="container">
+
+      	<!-- Displays the list of errors messages after the form submission -->
+      	<div ng-show="vm.isFormErrors" class="form-errors row">
+      		<ul>
+      			<li style="color:red;" ng-repeat="errorMsg in vm.formErrors track by $index"> * {{errorMsg}} </li>
+      		</ul>
+      	</div>
 		<div class="row">
 			<div class=" col-sm-3 col-md-3 col-lg-3 col-xs-6">
 				<h3 class="project-name"> {{vm.projectName}}</h3>
@@ -57,7 +64,7 @@
 							        <h4 class="modal-title text-center" id="myModalLabel">Edit User</h4>
 							      </div>
 							      <div class="modal-body">
-							        <div >
+							        <div>
 				 						<form name="userForm" novalidate>      
 									        <!-- NAME -->
 									        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">

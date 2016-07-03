@@ -88,6 +88,9 @@ class DetailsController {
          this.updateProject = (user) =>{
          	this.http.put(this.url+'/'+this.project._id,user)
          	.then((response)=>{
+         		if(response.staus == 202){
+         			console.log(response.data);
+         		}
          			this.getProject();         			    			
          			//$window.location.reload();
          	},(badResponse)=>{
@@ -97,6 +100,10 @@ class DetailsController {
          };
 
          this.addNewAccount = (user, userForm) => {
+         	//console.log("userForm error object ", userForm.$error);
+         	//console.log("userForm success object", userForm.$$success);
+         	//toggle the display of the list of errors messages after the form submission
+    	 	this.isFormErrors =false;
          	if(userForm.$valid){
                user.attachedProjectName = this.project.name;
          		this.http({
@@ -106,7 +113,9 @@ class DetailsController {
          		})
          		.then((response)=>{
          			if(response.status == 202){
-						console.log(JSON.stringify(response.data));
+         				this.isFormErrors = true;
+						this.formErrors = response.data;
+						console.log(this.formErrors);
          			}else{
 	         			this.getProject();
          			}

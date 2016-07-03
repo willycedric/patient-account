@@ -46,13 +46,6 @@ class ProjectsController {
         */
        this.addProject = (project, projectForm)=>{
           if(projectForm.$valid){
-<<<<<<< HEAD
-          	//console.log(project);
-          	//debugger;
-=======
-            //console.log(project);
-            //debugger;
->>>>>>> 0ed7e23bcfa3b4f45255c7e1854cdc890a15faa1
             this.postProject(project);
           }
        };
