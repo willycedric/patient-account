@@ -77,18 +77,19 @@ class DetailsController {
 		   */
 	      this.submitEditForm = (user,userForm)=>{
 	          if(userForm.$valid){
-	          	  this.project.accounts[user.key] = user.account;
-		          this.updateProject(this.project,user.account.role);
+	          	  //this.project.accounts[user.key] = user.account;
+		          //this.updateProject(this.project,user.account.role);
+		          this.updateProject(user);
 	            }
 	          };       
          /**
 		   *
 		   */
-         this.updateProject = (project,role) =>{
-         	this.http.put(this.url+'/'+project._id,project)
+         this.updateProject = (user) =>{
+         	this.http.put(this.url+'/'+this.project._id,user)
          	.then((response)=>{
          			this.getProject();         			    			
-         			$window.location.reload();
+         			//$window.location.reload();
          	},(badResponse)=>{
          		console.error(badResponse);
          	});
@@ -104,7 +105,11 @@ class DetailsController {
          			data:user
          		})
          		.then((response)=>{
-         			this.getProject();
+         			if(response.status == 202){
+						console.log(JSON.stringify(response.data));
+         			}else{
+	         			this.getProject();
+         			}
          		}, (err)=>{
          			console.error(err);
          		});
