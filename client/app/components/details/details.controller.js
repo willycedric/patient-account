@@ -1,10 +1,11 @@
 
 class DetailsController {
-  constructor($stateParams,$http,API,$window) {
+  constructor($stateParams,$http,API,$window,Socket) {
 		 this.http= $http;
 		 this.selectedRole;
 	     this.url =`${API.home}/api/project`;
 	     this.userPerRole = {};
+	     console.log(Socket.displayURL());
 	  	 //project id passing through url
 	     this.projectID = $stateParams.name;
     	 this.getProject();
@@ -163,7 +164,7 @@ class DetailsController {
 
   }  //End class
 
-DetailsController.$inject=['$stateParams','$http','API','$window'];
+DetailsController.$inject=['$stateParams','$http','API','$window','Socket'];
 export {DetailsController};
 
 
