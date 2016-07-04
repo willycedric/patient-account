@@ -3,7 +3,7 @@ class DetailsController {
   constructor($stateParams,$http,API,$window,Socket) {
 		 this.http= $http;
 		 this.selectedRole;
-	     this.url =`${API.home}/api/project`;
+	     this.url =`${API.voluntis}/api/project`;
 	     this.userPerRole = {};
 	     console.log(Socket.displayURL());
 	  	 //project id passing through url
@@ -166,5 +166,3 @@ class DetailsController {
 
 DetailsController.$inject=['$stateParams','$http','API','$window','Socket'];
 export {DetailsController};
-
-

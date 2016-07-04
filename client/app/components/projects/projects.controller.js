@@ -21,7 +21,7 @@ class ProjectsController {
       });
      };
 
-       this.url =`${API.home}/api/project`;
+       this.url =`${API.voluntis}/api/project`;
         this.getProjects();
        /**
         * [description]
