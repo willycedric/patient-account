@@ -5,7 +5,6 @@ class DetailsController {
 		 this.selectedRole;
 	     this.url =`${API.voluntis}/api/project`;
 	     this.userPerRole = {};
-	     console.log(Socket.displayURL());
 	  	 //project id passing through url
 	     this.projectID = $stateParams.name;
     	 this.getProject();
@@ -107,6 +106,7 @@ class DetailsController {
     	 	this.isFormErrors =false;
          	if(userForm.$valid){
                user.attachedProjectName = this.project.name;
+               var socket = Socket.connect(`${API.voluntis}`);
          		this.http({
          			url:this.url,
          			method:'POST',
@@ -119,6 +119,9 @@ class DetailsController {
 						console.log(this.formErrors);
          			}else{
 	         			this.getProject();
+	         			socket.on('saved', (data)=>{
+	         				console.log('socket data', data);
+	         			});
          			}
          		}, (err)=>{
          			console.error(err);
