@@ -106,7 +106,7 @@ class DetailsController {
     	 	this.isFormErrors =false;
          	if(userForm.$valid){
                user.attachedProjectName = this.project.name;
-               var socket = Socket.connect(`${API.voluntis}`);
+               var socket = Socket.connect();
          		this.http({
          			url:this.url,
          			method:'POST',
