@@ -9,6 +9,7 @@ class DetailsController {
 	     this.projectID = $stateParams.name;
     	 this.getProject();
     	 this.showSelectedUserRole = true;
+    	 Socket.connect();
     	 /**
 		   *
 		 */
@@ -106,7 +107,7 @@ class DetailsController {
     	 	this.isFormErrors =false;
          	if(userForm.$valid){
                user.attachedProjectName = this.project.name;
-               var socket = Socket.connect();
+              // var socket = Socket.connect();
          		this.http({
          			url:this.url,
          			method:'POST',
@@ -119,9 +120,9 @@ class DetailsController {
 						console.log(this.formErrors);
          			}else{
 	         			this.getProject();
-	         			socket.on('saved', (data)=>{
+	         			/*socket.on('saved', (data)=>{
 	         				console.log('socket data', data);
-	         			});
+	         			});*/
          			}
          		}, (err)=>{
          			console.error(err);
